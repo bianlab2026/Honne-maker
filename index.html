@@ -1,0 +1,2695 @@
+<!doctype html>
+<html lang="ja"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260824-05-39521aa","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script><script src="/_sdk/50d846425a1e5082.telemetry_sdk.js" integrity="sha512-Otbex+ztlVbcEGql0rXGd/3E3ee/hqAntg6DeuUEMG6pIPbXGOSvZbFZVzknAXi1tH/itQ+ijEhOTr2aWj6CXg=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>びあんラボ｜びあんラボの本音メーカー</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Zen+Maru+Gothic:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+:root {
+  --ink: #29263D;
+  --muted: #77738A;
+  --paper: #F8F7FC;
+
+  /* サブ背景 */
+  --peach: #F2EEFA;
+  --mint: #E7F0F5;
+	
+
+  /* メインアクセント */
+  --coral: #8B7AC8;
+  --coral-dark: #6959A8;
+	
+
+  /* グリーン系アクセント */
+  --mint-dark: #527A86;
+	
+
+  /* ボーダー */
+  --line: #E5E1EE;
+
+  /* フォーカス */
+  --focus: #6E83C7;
+}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; width: 100%; min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      color: var(--ink); background: var(--paper);
+      font-family: "Zen Maru Gothic", "DM Sans", sans-serif;
+    }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .page { width: 100%; min-height: calc(100 * min(var(--vh, 1vh), 1vh)); }
+    .shell { width: 100%; max-width: 720px; margin: 0 auto; padding: 24px 20px 112px; }
+    .soft-shadow { box-shadow: 0 10px 30px rgba(78, 50, 36, .08); }
+    .view { display: none; }
+    .view.active { display: block; animation: reveal .32s ease both; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .top-shell { max-width: 920px; padding: 20px; }
+    .top-intro { padding: 18px 4px 22px; }
+    .audience-grid { display: grid; gap: 16px; }
+	  
+  .audience-card {
+  position: relative;
+  min-height: 290px;
+  border: 0;
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px;
+  text-align: left;
+  color: var(--ink);
+  transition: transform .2s, box-shadow .2s;
+
+  /* 背景画像 */
+  background-size: cover;
+  background-position: center;
+}
+
+.top-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  /* 方眼紙 */
+  background-color: #fff;
+  background-image:
+    linear-gradient(to right, rgba(160, 160, 160, .42) 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(160, 160, 160, .42) 2px, transparent 2px);
+  background-size: 96px 96px;
+  background-position: center top;
+}
+
+/* 上の紫背景＋レース */
+.top-page::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 285px;
+
+  background-color: #d9cde8;
+
+  /* 下端を白い半円の連続にする */
+  background-image:
+    radial-gradient(
+      circle 48px at 48px 100%,
+      #fff 0 47px,
+      transparent 48px
+    );
+  background-size: 96px 96px;
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+}
+
+/* コンテンツを背景より前に出す */
+.top-page > * {
+  position: relative;
+  z-index: 1;
+}
+	  
+	  .top-page {
+  --lace-purple: #d9cde8;
+}
+
+/* 下の紫背景 */
+.top-page::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 270px;
+
+  background-color: #d9cde8;
+
+  /* 上端を白い半円の連続にする */
+  background-image:
+    radial-gradient(
+      circle 48px at 48px 0,
+      #fff 0 47px,
+      transparent 48px
+    );
+  background-size: 96px 96px;
+  background-position: 0 0;
+  background-repeat: repeat-x;
+}
+.hero {
+  padding: 42px 20px 28px;
+  text-align: center;
+}
+
+.hero-brand {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-brand img {
+  width: 500px;
+  height: auto;
+  display: block;
+}
+
+.hero h1 {
+  margin: 6px 0 0;
+  color: #40347f;
+  font-size: clamp(2.5rem, 9vw, 4rem);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.intro-panel {
+  width: min(88%, 680px);
+  margin: 0 auto 36px;
+  padding: 32px 22px 24px;
+  background: rgba(255,255,255,.92);
+  border: 3px solid #1b4c91;
+  box-shadow: 0 8px 18px rgba(45,31,76,.12);
+  text-align: center;
+}
+
+.intro-lead {
+  margin: 0 0 28px;
+  color: #1b4c91;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.intro-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.intro-step {
+  flex: 1;
+  color: #1b4c91;
+  text-align: center;
+}
+
+.step-icon {
+  margin-bottom: 8px;
+  font-size: 2rem;
+}
+
+.intro-step strong {
+  display: block;
+  font-size: .78rem;
+  line-height: 1.45;
+}
+
+.step-arrow {
+  color: #8d79c9;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.top-share-button {
+  width: 100%;
+  border: 3px solid #1b4c91;
+  padding: 15px 14px;
+  background: #f0e3ff;
+  color: #1b4c91;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 5px 10px rgba(45,31,76,.15);
+}
+
+.top-category-list {
+  width: min(88%, 680px);
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.top-category-button {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: block;
+}
+
+.top-category-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 8px 18px rgba(45,31,76,.15);
+  transition: transform .2s ease;
+}
+
+.top-category-button:hover img {
+  transform: translateY(-3px);
+}
+	  
+.top-footer {
+  margin-top: 70px;
+  padding: 42px 20px 50px;
+  text-align: center;
+  background: transparent;
+  color: #1b4c91;
+}
+
+.footer-logo img {
+  width: 120px;
+  max-width: 40%;
+  margin-bottom: 20px;
+}
+
+.footer-copy {
+  font-size: .78rem;
+  line-height: 2;
+  font-weight: 700;
+}
+
+
+    .audience-icon { width: 48px; height: 48px; padding: 11px; border-radius: 16px; background: rgba(255,255,255,.78); }
+    .round-cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      width: fit-content; border: 0; border-radius: 999px; padding: 13px 18px;
+      font-weight: 700; color: #fff; background: var(--ink);
+    }
+
+    .eyebrow { font-family: "DM Sans", sans-serif; letter-spacing: .09em; font-size: .78rem; font-weight: 700; color: var(--coral-dark); }
+    .page-title { margin: 8px 0 8px; font-size: clamp(1.7rem, 6vw, 2.35rem); line-height: 1.35; font-weight: 700; }
+    .page-copy { margin: 0; color: var(--muted); line-height: 1.8; font-size: .93rem; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; color: var(--muted); padding: 6px 0; margin-bottom: 18px; font-weight: 700; }
+
+    .progress-wrap { padding: 17px 18px; margin: 22px 0 18px; background: #fff; border: 1px solid var(--line); border-radius: 20px; }
+    .progress-track { height: 10px; overflow: hidden; border-radius: 99px; background: #f2ece7; margin-top: 10px; }
+    .progress-bar { height: 100%; width: 0; border-radius: inherit; background: var(--coral); transition: width .25s ease; }
+    .notice { display: none; margin: 0 0 18px; padding: 14px 16px; border-radius: 15px; background: #fff0d9; color: #78520d; font-size: .9rem; font-weight: 700; }
+    .notice.show { display: flex; gap: 9px; align-items: center; }
+
+    .question-card { margin: 0 0 18px; padding: 22px 18px; background: #fff; border: 1px solid var(--line); border-radius: 24px; }
+    .question-card > * + * { border-top: 1px solid var(--line); padding-top: 16px; }
+    .question-card .question-title { border-top: 0; padding-top: 0; }
+    .question-card.unanswered { border-color: #e6b64a; }
+    .question-card:focus { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .question-number { display: inline-flex; align-items: center; gap: 7px; color: var(--coral-dark); font-family: "DM Sans", sans-serif; font-size: .8rem; font-weight: 700; }
+    .question-title { margin: 10px 0 22px; font-size: 1.08rem; line-height: 1.75; font-weight: 700; }
+    .labels { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 12px; color: var(--muted); font-size: .79rem; font-weight: 700; }
+    .labels span:first-child { color: #d45b83; }
+    .labels span:last-child { text-align: right; color: #DDBA1E; }
+    .scale { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .scale-choice {
+      min-height: 52px; border: 2px solid #e5e0dc; border-radius: 14px; background: #fff;
+      display: flex; align-items: center; justify-content: center; transition: .16s;
+    }
+    .scale-choice:nth-child(1), .scale-choice:nth-child(2), .scale-choice:nth-child(3) { color: #d45b83; }
+    .scale-choice:nth-child(4) { color: #8d8984; }
+    .scale-choice:nth-child(5), .scale-choice:nth-child(6), .scale-choice:nth-child(7) { color: #DDBA1E; }
+    .scale-choice:hover { border-color: #A59EBD; background: #FAF7FF; }
+    .scale-choice.center { border-style: dashed; }
+    .scale-choice.selected { color: #fff; background: var(--coral); border-color: var(--coral-dark); box-shadow: inset 0 0 0 2px rgba(255,255,255,.35); }
+    .scale-choice .point { width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+    .scale-choice.selected .point { display: none; }
+    .selected-check { display: none; width: 20px; height: 20px; }
+    .scale-choice.selected .selected-check { display: block; }
+    .answer-text { min-height: 22px; margin: 12px 0 0; text-align: center; color: var(--coral-dark); font-size: .79rem; font-weight: 700; }
+    .importance {
+      display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; border: 1px solid #e8e1dc;
+      border-radius: 999px; padding: 10px 14px; background: #fff; color: #665b56; font-size: .85rem; font-weight: 700;
+    }
+    .importance.on { border-color: #e9b44b; background: #fff8e7; color: #926408; }
+
+    .sticky-action { position: fixed; z-index: 10; bottom: 0; left: 0; width: 100%; padding: 13px 20px calc(13px + env(safe-area-inset-bottom)); background: rgba(255,250,245,.92); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .sticky-action-inner { width: 100%; max-width: 680px; margin: 0 auto; }
+    .primary-button { width: 100%; border: 0; border-radius: 17px; padding: 17px; color: #fff; background: var(--coral); font-weight: 700; font-size: 1rem; box-shadow: 0 7px 16px rgba(203,86,71,.22); }
+    .primary-button:hover { background: var(--coral-dark); }
+
+    .summary-card { padding: 22px; border-radius: 25px; background: var(--mint); margin: 20px 0 26px; }
+    .summary-brand { color: var(--mint-dark); font-size: .84rem; font-weight: 700; }
+    .summary-title { margin: 5px 0 17px; font-size: 1.35rem; }
+    .summary-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .summary-meta div { padding: 12px; border-radius: 14px; background: rgba(255,255,255,.72); }
+    .summary-meta small { display: block; color: var(--muted); font-size: .72rem; }
+    .summary-meta strong { display: block; margin-top: 3px; font-size: .9rem; }
+
+    /* =========================
+   結果画面
+========================= */
+
+.result-card {
+  padding: 22px 20px;
+  border-radius: 22px;
+  background: #fff;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(78, 50, 36, .06);
+}
+
+.result-card.important-result {
+  border: 2px solid #e3ae37;
+  background: #fffdf7;
+}
+
+
+/* 4カテゴリーの仕切り */
+    .question-category-divider {
+      --section-color: #8B7AC8;
+      --section-soft: #F0EDFF;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 34px 0 14px;
+      padding: 13px 16px;
+      border-radius: 18px;
+      background: var(--section-soft);
+      border-left: 6px solid var(--section-color);
+    }
+    .question-category-divider:first-child { margin-top: 0; }
+    .section-number {
+      display: grid;
+      place-items: center;
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--section-color);
+      color: #fff;
+      font-family: "DM Sans", sans-serif;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+    .section-eyebrow {
+      margin: 0 0 2px;
+      color: var(--section-color);
+      font-family: "DM Sans", sans-serif;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+    .question-category-divider h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .question-card[data-section] {
+      border-top: 4px solid var(--section-color);
+    }
+    .question-card[data-section] .question-number {
+      color: var(--section-color);
+    }
+    .result-card[data-section] {
+      border-left: 5px solid var(--section-color);
+    }
+
+    .result-card .question-number {
+  margin: 0 0 7px;
+  color: var(--coral-dark);
+}
+
+.result-card.important-result .question-number {
+  color: #b17c13;
+}
+
+.result-question {
+  margin: 0 0 18px;
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: 700;
+}
+
+
+/* 結果スライダー */
+.result-scale {
+  position: relative;
+  padding: 0 4px;
+}
+
+.result-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 10px;
+  font-size: .72rem;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.result-scale-labels .left {
+  color: #d45b83;
+  text-align: left;
+}
+
+.result-scale-labels .right {
+  color: #b89518;
+  text-align: right;
+}
+
+
+/* 線 */
+.result-scale-track {
+  position: relative;
+  height: 36px;
+  margin: 0 8px;
+}
+
+
+/* 横線 */
+.result-scale-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  transform: translateY(-50%);
+  background: #ddd9e5;
+  border-radius: 999px;
+}
+
+
+/* 7個の目盛り */
+.result-scale-ticks {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+}
+
+.result-scale-tick {
+  width: 8px;
+  height: 8px;
+  margin: auto;
+  border-radius: 50%;
+  background: #d7d2df;
+}
+
+.result-scale-tick.center {
+  width: 10px;
+  height: 10px;
+  background: #aaa4b4;
+}
+
+
+/* 選択位置 */
+.result-scale-marker {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--coral);
+  border: 4px solid #fff;
+  box-shadow:
+    0 2px 7px rgba(80, 60, 130, .22),
+    0 0 0 2px var(--coral);
+}
+
+
+
+/* 選択内容 */
+.result-answer {
+  margin: 7px 0 0;
+  text-align: center;
+  color: var(--coral-dark);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+
+/* 重要 */
+.result-important {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #fff3cf;
+  color: #a37312;
+  font-size: .7rem;
+  font-weight: 700;
+}
+
+
+/* 話してみるヒント */
+.discussion {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.7;
+}
+
+.discussion strong {
+  color: var(--ink);
+}
+
+
+/* 結果画面の見出し */
+#answers-heading {
+  margin-bottom: 18px;
+}
+	  
+	  
+    .discussion { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: .84rem; line-height: 1.7; }
+    .talk-card { margin: 30px 0; padding: 24px 20px; border-radius: 25px; background: #f0edff; }
+    .talk-card ul { padding-left: 1.2em; margin: 13px 0 0; line-height: 1.9; color: #514d6b; font-size: .9rem; }
+    .share-card { padding: 22px; border-radius: 25px; background: #fff; border: 1px solid var(--line); }
+    .share-textarea { width: 100%; min-height: 100px; padding: 13px; resize: vertical; border: 1px solid #dcd4cf; border-radius: 14px; color: var(--ink); background: #fffdfb; line-height: 1.65; font-size: .9rem; }
+    .share-buttons { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
+    .share-button { min-height: 48px; border: 1px solid #ded7d1; border-radius: 14px; background: #fff; color: var(--ink); font-weight: 700; }
+    .share-button.x { border-color: #242424; color: #fff; background: #242424; }
+    .share-feedback { min-height: 22px; margin: 12px 0 0; color: var(--mint-dark); font-size: .82rem; font-weight: 700; }
+
+    @media (min-width: 680px) {
+      .top-shell { padding-top: 38px; }
+      .audience-grid { grid-template-columns: 1fr 1fr; }
+      .audience-card { min-height: 430px; }
+      .shell { padding-top: 38px; }
+      .question-card { padding: 26px; }
+      .share-buttons { grid-template-columns: repeat(3, 1fr); }
+    }
+
+
+	  /* =========================
+   結果画像保存
+========================= */
+
+.result-image-button {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 16px;
+  padding: 15px 18px;
+  background: var(--coral);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 7px 16px rgba(139, 122, 200, .22);
+  transition: transform .15s ease, background .15s ease;
+}
+
+.result-image-button:hover {
+  background: var(--coral-dark);
+  transform: translateY(-1px);
+}
+
+.result-image-button:active {
+  transform: translateY(0);
+}
+
+.result-image-button:disabled {
+  opacity: .65;
+  cursor: wait;
+  transform: none;
+}
+
+.result-image-feedback {
+  min-height: 22px;
+  margin: 10px 0 0;
+  color: var(--mint-dark);
+  font-size: .82rem;
+  font-weight: 700;
+  text-align: center;
+}
+	  
+	  .result-logo {
+  width: 280px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+}
+	  
+.step-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step-icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+}
+	  
+	  /* =========================================================
+   回答画面・結果画面
+   TOPと同じ方眼＋紫フリル背景
+========================================================= */
+
+#questions-view,
+#result-view {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background-color: #fff;
+
+  /* TOPと同じ方眼紙 */
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(160, 160, 160, .42) 2px,
+      transparent 2px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(160, 160, 160, .42) 2px,
+      transparent 2px
+    );
+
+  background-size: 96px 96px;
+  background-position: center top;
+}
+
+/* 上の紫背景＋白いフリル */
+#questions-view::before,
+#result-view::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 285px;
+
+  background-color: #d9cde8;
+
+  background-image:
+    radial-gradient(
+      circle 48px at 48px 100%,
+      #fff 0 47px,
+      transparent 48px
+    );
+
+  background-size: 96px 96px;
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+
+  pointer-events: none;
+}
+
+/* 下の紫背景＋白いフリル */
+#questions-view::after,
+#result-view::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 270px;
+
+  background-color: #d9cde8;
+
+  background-image:
+    radial-gradient(
+      circle 48px at 48px 0,
+      #fff 0 47px,
+      transparent 48px
+    );
+
+  background-size: 96px 96px;
+  background-position: 0 0;
+  background-repeat: repeat-x;
+
+  pointer-events: none;
+}
+
+/* 中身を背景より前へ */
+#questions-view > .shell,
+#result-view > .shell {
+  position: relative;
+  z-index: 1;
+}
+  </style>
+  <script src="/_sdk/b3bf9e8ac58e6ad6.data_sdk.js" type="text/javascript" integrity="sha512-otc1u9NYq9Ms5Jt//7vmhrrqR5CLPr8Jdgs6741gqniClfLMcfmC+jK/cKuQdhLv6G0esJ/FzaMS9tv0T/vj/Q=="></script>
+  <script src="/_sdk/a27879be4562f807.resizing_sdk.js" type="text/javascript" integrity="sha512-trcxRwz+QLrzK0Dqg95xqVRryR7WtWui2YopXyzOIr3WMde3j/xCRgT63/b/EAg7klDsAOuHzoRgoryhwm8QFw=="></script>
+ </head>
+ <body data-template-id="__page-root">
+  <main class="page">
+   <section id="top-view" class="view">
+  <div class="top-page">
+
+    <!-- ヘッダー -->
+<header class="hero">
+  <p class="hero-brand">
+    <img src="image/logo.png" alt="びあんラボ">
+  </p>
+</header>
+
+    <!-- 説明 -->
+    <section class="intro-panel">
+      <p class="intro-lead">
+        交際中のふたりも、そうでないふたりも。<br>
+        一緒に本音を見てみよう。
+      </p>
+
+     <div class="intro-steps">
+  <div class="intro-step">
+    <div class="step-icon">
+      <img src="image/1.png" alt="">
+    </div>
+    <strong>誘って</strong>
+  </div>
+
+  <span class="step-arrow">→</span>
+
+  <div class="intro-step">
+    <div class="step-icon">
+      <img src="image/2.png" alt="">
+    </div>
+    <strong>それぞれ本音で<br>価値観をチェック</strong>
+  </div>
+
+  <span class="step-arrow">→</span>
+
+  <div class="intro-step">
+    <div class="step-icon">
+      <img src="image/3.png" alt="">
+    </div>
+    <strong>結果を照らし<br>合わせて話そう</strong>
+  </div>
+</div>
+
+      <button id="share-top-button" class="top-share-button">
+        🔗 リンクをシェアして一緒にチェック！
+      </button>
+       <p id="share-top-feedback" class="share-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- カテゴリー -->
+    <div id="category-list" class="top-category-list">
+
+      <button
+        type="button"
+        class="top-category-button"
+        data-category="student"
+        aria-label="学生向けをはじめる"
+      >
+        <img
+          src="./image/student.PNG"
+          alt="学生向け"
+        >
+      </button>
+
+      <button
+        type="button"
+        class="top-category-button"
+        data-category="working"
+        aria-label="社会人向けをはじめる"
+      >
+        <img
+          src="./image/working.PNG"
+          alt="社会人向け"
+        >
+      </button>
+
+    </div>
+
+    <!-- フッター -->
+    <footer class="top-footer">
+   <a href="https://bian-lab.jp/" class="footer-logo" target="_blank" rel="noopener noreferrer">
+  <img src="./image/logo3.png" alt="BIAN LAB">
+</a>
+
+      <div class="footer-copy">
+        <p>レズビアンのためのwebメディア「びあんラボ」</p>
+        <p>@2026 bian Lab.</p>
+      </div>
+    </footer>
+
+  </div>
+   </section>
+   <section id="questions-view" class="view">
+    <div class="shell">
+     <button type="button" id="back-home" class="back-link"><i data-lucide="arrow-left" width="18"></i><span data-template-id="back-home-label" class="canva-text" style="color: rgb(116, 116, 129); font-weight: 700; font-style: normal; font-size: 16px;">トップへ戻る</span></button>
+
+		
+   
+		
+     <div id="incomplete-notice" class="notice" role="alert" tabindex="-1">
+      <i data-lucide="circle-alert" width="19"></i><span data-template-id="incomplete-notice-text" class="canva-text" style="color: rgb(120, 82, 13); font-weight: 700; font-style: normal; font-size: 16px;">まだ回答していない項目があります。最初の未回答項目へ移動しました。</span>
+     </div>
+     <div id="question-list"></div>
+    </div>
+    <div class="sticky-action">
+     <div class="sticky-action-inner">
+      <button id="show-result-button" type="button" data-template-id="show-result-button" class="canva-button primary-button" style="background: rgb(239, 116, 97); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">本音チェック完了</button>
+     </div>
+    </div>
+   </section>
+   <section id="result-view" class="view">
+    <div class="shell">
+     <button type="button" id="back-answers" class="back-link"><i data-lucide="arrow-left" width="18"></i><span data-template-id="back-answers-label" class="canva-text" style="color: rgb(116, 116, 129); font-weight: 700; font-style: normal; font-size: 16px;">回答を編集する</span></button>
+     <header>
+   
+     <img src="image/result.png" alt="びあんラボ" class="result-logo">
+		 
+      <p data-template-id="result-copy" class="canva-text page-copy" style="color: rgb(116, 116, 129); font-weight: 400; font-style: normal; font-size: 16px;">これは診断結果ではなく、あなたが選んだ今の気持ちです。気になる項目から、ふたりで話してみてください。</p>
+     </header>
+     <section class="summary-card soft-shadow" aria-label="回答サマリー">
+      <p data-template-id="summary-brand" class="canva-text summary-brand" style="color: rgb(54, 125, 105); font-weight: 700; font-style: normal; font-size: 16px;">ここから話してみよう</p>
+      <h2 data-template-id="summary-title" class="canva-text summary-title" style="color: rgb(49, 49, 59); font-weight: 700; font-style: normal; font-size: 24px;">話し合いのヒント</h2>
+      <div class="summary-meta">
+       <div><small data-template-id="summary-category-label" class="canva-text" style="color: rgb(116, 116, 129); font-weight: 400; font-style: normal; font-size: 16px;">対象カテゴリー</small><strong id="summary-category"></strong>
+       </div>
+       <div><small data-template-id="summary-status-label" class="canva-text" style="color: rgb(116, 116, 129); font-weight: 400; font-style: normal; font-size: 16px;">回答済み状況</small><strong id="summary-status"></strong>
+       </div>
+      </div>
+     </section>
+ 
+		<!-- 結果シェア（上） -->
+<section class="share-card soft-shadow result-share-top" aria-labelledby="share-heading-top">
+  <h2 id="share-heading-top" class="canva-text text-xl font-bold mb-2">
+    結果をシェアする
+  </h2>
+
+  <p class="page-copy mb-4">
+    ふたりでやってみたことを共有したり、あとで見返したりできます。
+  </p>
+
+  <button
+    id="save-result-image-top"
+    type="button"
+    class="result-image-button"
+  >
+    画像で結果を保存
+  </button>
+
+  <p
+    id="result-image-feedback-top"
+    class="result-image-feedback"
+    aria-live="polite"
+  ></p>
+
+  <div class="share-buttons">
+    <button
+      id="share-x-top"
+      type="button"
+      class="share-button x"
+    >
+      Xで共有
+    </button>
+
+    <button
+      id="share-line-top"
+      type="button"
+      class="share-button"
+    >
+      LINEで共有
+    </button>
+
+    <button
+      id="share-link-top"
+      type="button"
+      class="share-button"
+    >
+      リンクを共有
+    </button>
+  </div>
+
+  <p id="share-feedback-top" class="share-feedback" aria-live="polite"></p>
+</section>
+
+<section aria-labelledby="answers-heading">
+  <h2 id="answers-heading" ...>あなたの回答一覧</h2>
+  <div id="result-list"></div>
+</section>
+		
+     <aside class="talk-card">
+      <h2 data-template-id="talk-title" class="canva-text text-xl font-bold" style="color: rgb(64, 59, 87); font-weight: 700; font-style: normal; font-size: 24px;">違いを、対話のきっかけに</h2>
+      <ul>
+       <li data-template-id="talk-point-1" class="canva-text" style="color: rgb(81, 77, 107); font-weight: 400; font-style: normal; font-size: 16px;">違うこと自体は、問題ではありません。</li>
+       <li data-template-id="talk-point-2" class="canva-text" style="color: rgb(81, 77, 107); font-weight: 400; font-style: normal; font-size: 16px;">「なぜそう思うの？」を、やさしく聞いてみましょう。</li>
+       <li data-template-id="talk-point-3" class="canva-text" style="color: rgb(81, 77, 107); font-weight: 400; font-style: normal; font-size: 16px;">★をつけた、自分的に重要な項目から重点的に話してみるのもおすすめです。</li>
+       <li data-template-id="talk-point-4" class="canva-text" style="color: rgb(81, 77, 107); font-weight: 400; font-style: normal; font-size: 16px;">相手を説得するより、まずは理解することを大切に。</li>
+      </ul>
+     </aside>
+    <section class="share-card soft-shadow" aria-labelledby="share-heading">
+  <h2 id="share-heading" data-template-id="share-title" class="canva-text text-xl font-bold mb-2" style="color: rgb(49, 49, 59); font-weight: 700; font-style: normal; font-size: 24px;">
+    結果をシェアする
+  </h2>
+
+  <p data-template-id="share-copy" class="canva-text page-copy mb-4" style="color: rgb(116, 116, 129); font-weight: 400; font-style: normal; font-size: 16px;">
+    ふたりでやってみたことを共有したり、あとで見返したりできます。
+  </p>
+
+  <!-- 結果画像保存 -->
+  <button
+    id="save-result-image"
+    type="button"
+    class="result-image-button"
+  >
+    画像で結果を保存
+  </button>
+
+  <p
+    id="result-image-feedback"
+    class="result-image-feedback"
+    aria-live="polite"
+  ></p>
+
+  <div class="share-buttons">
+    <button
+      id="share-x"
+      type="button"
+      data-template-id="share-x-button"
+      class="canva-button share-button x"
+      style="background: rgb(36, 36, 36); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;"
+    >
+      Xで共有
+    </button>
+
+    <button
+      id="share-line"
+      type="button"
+      data-template-id="share-line-button"
+      class="canva-button share-button"
+      style="background: rgb(255, 255, 255); color: rgb(49, 49, 59); font-weight: 700; font-style: normal; font-size: 16px;"
+    >
+      LINEで共有
+    </button>
+
+    <button
+      id="share-link"
+      type="button"
+      data-template-id="share-link-button"
+      class="canva-button share-button"
+      style="background: rgb(255, 255, 255); color: rgb(49, 49, 59); font-weight: 700; font-style: normal; font-size: 16px;"
+    >
+      リンクを共有
+    </button>
+  </div>
+
+  <p id="share-feedback" class="share-feedback" aria-live="polite"></p>
+</section>
+    </div>
+   </section>
+  </main>
+  <template id="question-template">
+   <article class="question-card soft-shadow" tabindex="-1">
+    <p class="question-number"><span class="category-mark"></span><span class="question-index"></span></p>
+    <h2 class="question-title"></h2>
+    <div class="labels"><span class="left-label"></span><span class="right-label"></span>
+    </div>
+    <div class="scale" role="radiogroup"></div>
+    <p class="answer-text" aria-live="polite"></p><button type="button" class="importance" aria-pressed="false"><span class="importance-icon">☆</span><span class="importance-label"></span></button>
+   </article>
+  </template>
+  <script src="/_sdk/489148d8756906ef.editing_sdk.js" integrity="sha512-hxxSbMNp1t+UEu3j/dIQUU4MJnmsCo0Gs3iQVVS706vrCJ3Yt2+ySOlfJEaPyiyQVLjZRmn1dNVqg6M40VZZHQ=="></script>
+  <script>
+    const SCALE_MEANINGS = [
+      "左の価値観にかなり近い", "左の価値観に近い", "やや左",
+      "どちらともいえない", "やや右", "右の価値観に近い", "右の価値観にかなり近い"
+    ];
+
+    // data/student.json・data/working.jsonとして外部化しやすい共通スキーマのデータ層
+    const questionData = {
+  student: [
+    { name: "離れている時のコミュニケーション", key: "distance", questions: [
+      ["LINE", "こまめにしたい", "必要な時だけでいい", "連絡の頻度について話してみよう"],
+      ["電話", "電話が好き", "電話は苦手", "電話で心地よい距離感は？"],
+      ["LINEで毎日挨拶はする？", "毎日したい", "毎日はしなくていい", "挨拶に求める安心感は？"],
+      ["離れている時の連絡について", "いつでも連絡したい", "お互いのペースでいい", "忙しい時の連絡ルールは？"]
+    ]},
+    { name: "第三者を含むコミュニケーション", key: "third-party", questions: [
+      ["カミングアウト", "できるだけ伝えたい", "必要な相手だけでいい", "話す・話さない理由は？"],
+      ["「友達」として紹介されることをどう感じる？", "恋人として紹介してほしい", "友達としてで気にならない", "どんな紹介が心地よい？"],
+      ["異性との関わり", "気になる・共有してほしい", "気にしない・自由でいてほしい", "安心できる境界線は？"],
+      ["「友達と恋人の境界線はどこ？」", "ここからは恋人", "友達との境界はあいまい", "境界線について話してみよう"]
+    ]},
+    { name: "一緒にいる時のコミュニケーション", key: "together", questions: [
+      ["「彼女」などの呼ばれ方", "恋人として呼んでほしい", "場面に合わせたい", "心地よい呼ばれ方は？"],
+      ["ボイ／フェムなどの性表現", "言葉で表現したい", "決めつけられたくない", "自分らしさをどう扱いたい？"],
+      ["デート中の距離感", "恋人っぽさを出したい", "恋人っぽさは出したくない", "人前で安心できる距離感は？"],
+      ["けんかやすれ違いが起きたら？", "すぐ話したい", "時間を置いてから話したい", "話し合いやすいタイミングは？"]
+    ]},
+    { name: "これからについて", key: "future", questions: [
+      ["テスト期間・部活など一時的に忙しい時の関わり", "忙しくても連絡したい", "落ち着くまでそっとしてほしい", "忙しい時の支え方は？"],
+      ["記念日や誕生日をどう過ごしたい？", "一緒に特別に過ごしたい", "無理せずいつも通りでいい", "記念日に大切にしたいことは？"],
+      ["恋人と一緒にやってみたいことは？", "いろいろ一緒に挑戦したい", "無理なく少しずつでいい", "一緒にやってみたいことは？"],
+      ["これからのふたりについて", "早めに話しておきたい", "今を大切にしたい", "どんな未来を話してみたい？"]
+    ]}
+  ],
+  working: [
+    { name: "離れている時のコミュニケーション", key: "distance", questions: [
+      ["LINE", "こまめにしたい", "必要な時だけでいい", "連絡の頻度について話してみよう"],
+      ["電話", "電話が好き", "電話は苦手", "電話で心地よい距離感は？"],
+      ["LINEで毎日挨拶はする？", "毎日したい", "毎日はしなくていい", "挨拶に求める安心感は？"],
+      ["飲み会中の連絡について", "途中でも連絡がほしい", "終わってからでいい", "飲み会中の連絡ルールは？"]
+    ]},
+    { name: "第三者を含むコミュニケーション", key: "third-party", questions: [
+      ["カミングアウト", "できるだけ伝えたい", "必要な相手だけでいい", "話す・話さない理由は？"],
+      ["「友達」として紹介されることをどう感じる？", "恋人として紹介してほしい", "友達としてで気にならない", "どんな紹介が心地よい？"],
+      ["年末は家族で過ごすなど家族内のしきたりはある？", "家族の予定を優先したい", "ふたりの予定も大切にしたい", "家族との過ごし方をどう共有する？"],
+      ["「友達と恋人の境界線はどこ？」", "ここからは恋人", "友達との境界はあいまい", "境界線について話してみよう"]
+    ]},
+    { name: "一緒にいる時のコミュニケーション", key: "together", questions: [
+      ["「彼女」などの呼ばれ方", "恋人として呼んでほしい", "場面に合わせたい", "心地よい呼ばれ方は？"],
+      ["デート中の距離感", "恋人っぽさを出したい", "恋人っぽさは出したくない", "人前で安心できる距離感は？"],
+      ["けんかやすれ違いが起きたら？", "その日のうちに話したい", "一度冷ましてから話したい", "話し合いやすいタイミングは？"],
+      ["一緒にいる時の過ごし方", "できるだけ一緒に楽しみたい", "それぞれの時間もほしい", "一緒にいる時に大切にしたいことは？"]
+    ]},
+    { name: "これからについて", key: "future", questions: [
+      ["子供が欲しい願望", "子どもを望んでいる", "今は考えていない", "子どもについて話してみよう", "hasChildren"],
+      ["将来or現在ペットを飼いたい願望はある？", "飼いたい", "今は考えていない", "ペットとの暮らしで大切なことは？"],
+      ["同棲について", "早めがいい", "慎重に考えたい", "具体的に何ヶ月・何年など目安を話してみよう"],
+      ["将来パートナーシップ制度（or同性婚）について", "利用・制度化を考えたい", "今は特に考えていない", "制度についての希望や考えは？"]
+    ]}
+  ]
+};
+
+const categories = {
+  student: { name: "学生向け", icon: "graduation-cap" },
+  working: { name: "社会人向け", icon: "briefcase-business" }
+};
+
+const sectionStyles = {
+  distance: { name: "離れている時のコミュニケーション", color: "#7A8FD0", soft: "#EEF1FC" },
+  "third-party": { name: "第三者を含むコミュニケーション", color: "#C58AB8", soft: "#FAEFF8" },
+  together: { name: "一緒にいる時のコミュニケーション", color: "#65A58E", soft: "#EDF7F2" },
+  future: { name: "これからについて", color: "#D29A57", soft: "#FFF4E7" }
+};
+
+const state = { category: null, answers: {}, important: {} };
+    const $ = (id) => document.getElementById(id);
+    const storageKey = (category) => "bian-lab-values-" + category;
+
+    function questionsFor(category) {
+      let index = 0;
+      return questionData[category].flatMap(section =>
+        section.questions.map(item => ({
+          id: category + "-" + (++index),
+          category,
+          section: section.key,
+          sectionName: section.name,
+          question: item[0],
+          leftLabel: item[1],
+          rightLabel: item[2],
+          discussion: item[3],
+          special: item[4] || null
+        }))
+      );
+    }
+
+    function loadDraft(category) {
+      const saved = localStorage.getItem(storageKey(category));
+      if (!saved) return { answers: {}, important: {} };
+      try {
+        const data = JSON.parse(saved);
+        return { answers: data.answers || {}, important: data.important || {} };
+      } catch { return { answers: {}, important: {} }; }
+    }
+
+    function saveDraft() {
+      if (!state.category) return;
+      localStorage.setItem(storageKey(state.category), JSON.stringify({
+        answers: state.answers, important: state.important,
+        completed: answeredCount() === questionsFor(state.category).length,
+        updatedAt: new Date().toISOString()
+      }));
+    }
+
+    function answeredCount() {
+      return Object.keys(state.answers).filter(id => state.answers[id]).length;
+    }
+
+    function showView(id) {
+      document.querySelectorAll(".view").forEach(view => view.classList.remove("active"));
+      $(id).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "instant" });
+      lucide.createIcons();
+    }
+
+    function route(path) {
+      window.location.hash = "#" + path;
+    }
+
+    function currentPath() {
+      return (window.location.hash || "#/").slice(1).split("?")[0];
+    }
+
+    function getSharePayload() {
+      const hash = window.location.hash;
+      const index = hash.indexOf("?");
+      if (index < 0) return null;
+      const value = new URLSearchParams(hash.slice(index + 1)).get("v");
+      if (!value) return null;
+      try { return JSON.parse(decodeURIComponent(escape(atob(value)))); } catch { return null; }
+    }
+
+    function encodePayload() {
+      return btoa(unescape(encodeURIComponent(JSON.stringify({
+        a: state.answers, i: state.important
+      }))));
+    }
+
+    function renderQuestions() {
+      const category = state.category;
+      const questions = questionsFor(category);
+      $("question-list").innerHTML = "";
+
+      let previousSection = null;
+
+      questions.forEach((question, index) => {
+        if (question.section !== previousSection) {
+          const section = sectionStyles[question.section];
+          const divider = document.createElement("div");
+          divider.className = "question-category-divider";
+          divider.style.setProperty("--section-color", section.color);
+          divider.style.setProperty("--section-soft", section.soft);
+          divider.innerHTML = `
+            <span class="section-number">${Object.keys(sectionStyles).indexOf(question.section) + 1}</span>
+            <div>
+              <p class="section-eyebrow">CATEGORY</p>
+              <h2>${section.name}</h2>
+            </div>
+          `;
+          $("question-list").appendChild(divider);
+          previousSection = question.section;
+        }
+
+        const fragment = $("question-template").content.cloneNode(true);
+        const card = fragment.querySelector(".question-card");
+        card.dataset.questionId = question.id;
+        card.dataset.section = question.section;
+        card.style.setProperty("--section-color", sectionStyles[question.section].color);
+        card.querySelector(".category-mark").textContent = question.sectionName;
+        card.querySelector(".question-index").textContent = "質問 " + (index + 1) + " / " + questions.length;
+        card.querySelector(".question-title").textContent = question.question;
+        card.querySelector(".left-label").textContent = question.leftLabel;
+        card.querySelector(".right-label").textContent = question.rightLabel;
+        card.querySelector(".importance-label").textContent = question.special === "hasChildren" ? "子供がいる" : "自分的に重要！";
+
+        const scale = card.querySelector(".scale");
+        scale.setAttribute("aria-label", question.question + "の回答");
+        SCALE_MEANINGS.forEach((meaning, pointIndex) => {
+          const value = pointIndex + 1;
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "scale-choice" + (value === 4 ? " center" : "");
+          button.setAttribute("role", "radio");
+          button.setAttribute("aria-label", meaning);
+          button.dataset.value = value;
+          button.innerHTML = '<span class="point"></span><i class="selected-check" data-lucide="check" width="20"></i>';
+          button.addEventListener("click", () => selectAnswer(question.id, value));
+          scale.appendChild(button);
+        });
+
+        const importantButton = card.querySelector(".importance");
+        importantButton.addEventListener("click", () => {
+          state.important[question.id] = !state.important[question.id];
+          updateQuestionCard(card, question);
+          saveDraft();
+        });
+
+        $("question-list").appendChild(fragment);
+        updateQuestionCard($("question-list").lastElementChild, question);
+      });
+
+      lucide.createIcons();
+    }
+
+    function selectAnswer(id, value) {
+      state.answers[id] = value;
+      const question = questionsFor(state.category).find(item => item.id === id);
+      const card = document.querySelector('[data-question-id="' + id + '"]');
+      updateQuestionCard(card, question);
+      saveDraft();
+    }
+
+    function updateQuestionCard(card, question) {
+      const value = state.answers[question.id];
+      card.classList.toggle("unanswered", !value);
+      card.querySelectorAll(".scale-choice").forEach(button => {
+        const selected = Number(button.dataset.value) === value;
+        button.classList.toggle("selected", selected);
+        button.setAttribute("aria-checked", String(selected));
+      });
+      card.querySelector(".answer-text").textContent = value ? SCALE_MEANINGS[value - 1] : "まだ選んでいません";
+      const important = Boolean(state.important[question.id]);
+      const importance = card.querySelector(".importance");
+      importance.classList.toggle("on", important);
+      importance.setAttribute("aria-pressed", String(important));
+      importance.querySelector(".importance-icon").textContent = question.special === "hasChildren"
+        ? (important ? "✓" : "＋")
+        : (important ? "★" : "☆");
+      importance.querySelector(".importance-label").textContent = question.special === "hasChildren"
+        ? "子供がいる"
+        : "自分的に重要！";
+    }
+
+
+    function startCategory(category) {
+      state.category = category;
+      const shared = getSharePayload();
+      const draft = shared && currentPath().includes(category + "/result")
+        ? { answers: shared.a || {}, important: shared.i || {} }
+        : loadDraft(category);
+      state.answers = draft.answers;
+      state.important = draft.important;
+      renderQuestions();
+    }
+
+    function attemptResult() {
+      const questions = questionsFor(state.category);
+      const missing = questions.find(question => !state.answers[question.id]);
+      if (missing) {
+        $("incomplete-notice").classList.add("show");
+        const card = document.querySelector('[data-question-id="' + missing.id + '"]');
+        card.classList.add("unanswered");
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+        setTimeout(() => card.focus({ preventScroll: true }), 500);
+        return;
+      }
+      $("incomplete-notice").classList.remove("show");
+      saveDraft();
+      route("/" + state.category + "/result?v=" + encodePayload());
+    }
+
+    function responseText(question) {
+      const value = state.answers[question.id];
+      if (!value) return "未回答";
+      if (value === 4) return "どちらともいえない";
+      const label = value < 4 ? question.leftLabel : question.rightLabel;
+      return label + "（" + SCALE_MEANINGS[value - 1] + "）";
+    }
+		/* =========================================================
+   結果画像生成・PNG保存
+========================================================= */
+
+const RESULT_IMAGE = {
+  width: 1080,
+  height: 2300,
+
+  colors: {
+    background: "#F8F7FC",
+    purple: "#8B7AC8",
+    purpleDark: "#6959A8",
+    ink: "#29263D",
+    muted: "#77738A",
+    line: "#DCD8E8",
+    white: "#FFFFFF",
+    left: "#D45B83",
+    right: "#DDBA1E",
+    neutral: "#8D8984",
+    important: "#E3AE37",
+    softPurple: "#F0EDFF",
+    sections: {
+      distance: "#7A8FD0",
+      "third-party": "#C58AB8",
+      together: "#65A58E",
+      future: "#D29A57"
+    }
+  }
+};
+
+
+/**
+ * Canvasに角丸四角形を描く
+ */
+function roundedRect(ctx, x, y, width, height, radius) {
+  const r = Math.min(radius, width / 2, height / 2);
+
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + width, y, x + width, y + height, r);
+  ctx.arcTo(x + width, y + height, x, y + height, r);
+  ctx.arcTo(x, y + height, x, y, r);
+  ctx.arcTo(x, y, x + width, y, r);
+  ctx.closePath();
+}
+
+
+/**
+ * Canvasに文字を描く
+ */
+function drawText(
+  ctx,
+  text,
+  x,
+  y,
+  options = {}
+) {
+  const {
+    font = '700 28px "Zen Maru Gothic"',
+    color = RESULT_IMAGE.colors.ink,
+    align = "left",
+    baseline = "alphabetic"
+  } = options;
+
+  ctx.save();
+
+  ctx.font = font;
+  ctx.fillStyle = color;
+  ctx.textAlign = align;
+  ctx.textBaseline = baseline;
+
+  ctx.fillText(text, x, y);
+
+  ctx.restore();
+}
+
+
+/**
+ * Canvas上に1問分の価値観スケールを描画
+ */
+function drawResultQuestion(
+  ctx,
+  question,
+  index,
+  value,
+  important,
+  x,
+  y,
+  width
+) {
+  const colors = RESULT_IMAGE.colors;
+
+  /*
+   * カード内の基本設定
+   */
+  const padding = 22;
+  const questionX = x + padding;
+  const questionWidth = width - padding * 2;
+
+  const questionFont =
+    '700 17px "Zen Maru Gothic"';
+
+  const lineHeight = 25;
+
+  /*
+   * 質問文を自動改行
+   */
+  function wrapText(text, maxWidth) {
+    const lines = [];
+    let line = "";
+
+    for (const char of text) {
+      const testLine = line + char;
+
+      if (
+        ctx.measureText(testLine).width > maxWidth &&
+        line !== ""
+      ) {
+        lines.push(line);
+        line = char;
+      } else {
+        line = testLine;
+      }
+    }
+
+    if (line) {
+      lines.push(line);
+    }
+
+    return lines;
+  }
+
+  ctx.save();
+
+  /*
+   * 質問文の改行数を取得
+   */
+  ctx.font = questionFont;
+
+  const questionLines = wrapText(
+    question.question,
+    questionWidth
+  );
+
+  /*
+   * 質問文の長さに応じてカードを伸ばす
+   */
+  const baseCardHeight = 150;
+
+  const extraHeight =
+    Math.max(
+      0,
+      questionLines.length - 1
+    ) * lineHeight;
+
+  const cardHeight =
+    baseCardHeight + extraHeight;
+
+  /*
+   * カード背景
+   */
+  ctx.fillStyle = colors.white;
+
+  roundedRect(
+    ctx,
+    x,
+    y,
+    width,
+    cardHeight,
+    18
+  );
+
+  ctx.fill();
+
+  /*
+   * 質問番号
+   */
+  drawText(
+    ctx,
+    String(index + 1).padStart(2, "0"),
+    questionX,
+    y + 25,
+    {
+      font: '700 13px "DM Sans"',
+      color: colors.muted
+    }
+  );
+
+  /*
+   * 重要マーク
+   */
+  if (important) {
+    drawText(
+      ctx,
+      question.special === "hasChildren"
+        ? "子供がいる"
+        : "自分的に重要！",
+      x + width - padding,
+      y + 25,
+      {
+        font:
+          '700 12px "Zen Maru Gothic"',
+        color: colors.important,
+        align: "right"
+      }
+    );
+  }
+
+  /*
+   * 質問文
+   */
+  const questionStartY = y + 52;
+
+  questionLines.forEach(
+    (line, lineIndex) => {
+      drawText(
+        ctx,
+        line,
+        questionX,
+        questionStartY +
+          lineIndex * lineHeight,
+        {
+          font: questionFont,
+          color: colors.ink
+        }
+      );
+    }
+  );
+
+  /*
+   * 質問文の下にラベルを配置
+   */
+  const questionBottomY =
+    questionStartY +
+    (questionLines.length - 1) *
+      lineHeight;
+
+  const labelsY =
+    questionBottomY + 22;
+
+  /*
+   * 左ラベル
+   */
+  drawText(
+    ctx,
+    question.leftLabel,
+    questionX,
+    labelsY,
+    {
+      font:
+        '500 11px "Zen Maru Gothic"',
+      color: colors.muted
+    }
+  );
+
+  /*
+   * 右ラベル
+   */
+  drawText(
+    ctx,
+    question.rightLabel,
+    x + width - padding,
+    labelsY,
+    {
+      font:
+        '500 11px "Zen Maru Gothic"',
+      color: colors.muted,
+      align: "right"
+    }
+  );
+
+  /*
+   * スライダー
+   */
+  const lineY =
+    labelsY + 23;
+
+  ctx.strokeStyle =
+    colors.line;
+
+  ctx.lineWidth = 4;
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    questionX,
+    lineY
+  );
+
+  ctx.lineTo(
+    x + width - padding,
+    lineY
+  );
+
+  ctx.stroke();
+
+  /*
+   * 7個の目盛り
+   */
+  for (let i = 0; i < 7; i++) {
+
+    const pointX =
+      questionX +
+      (questionWidth / 6) * i;
+
+    ctx.fillStyle =
+      i === 3
+        ? colors.muted
+        : colors.line;
+
+    ctx.beginPath();
+
+    ctx.arc(
+      pointX,
+      lineY,
+      i === 3 ? 5 : 4,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+  }
+
+  /*
+   * 選択位置
+   */
+  const pointX =
+    questionX +
+    (questionWidth / 6) *
+      (value - 1);
+
+  ctx.fillStyle =
+    colors.purple;
+
+  ctx.beginPath();
+
+  ctx.arc(
+    pointX,
+    lineY,
+    16,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fill();
+
+  ctx.strokeStyle =
+    colors.white;
+
+  ctx.lineWidth = 5;
+
+  ctx.stroke();
+
+  /*
+   * 回答内容
+   */
+  const answerText =
+    SCALE_MEANINGS[value - 1] || "";
+
+  drawText(
+    ctx,
+    answerText,
+    x + width / 2,
+    lineY + 35,
+    {
+      font:
+        '700 11px "Zen Maru Gothic"',
+      color:
+        colors.purpleDark,
+      align: "center"
+    }
+  );
+
+  ctx.restore();
+
+  /*
+   * 実際のカード高さを返す
+   */
+  return cardHeight;
+}
+
+/**
+ * 結果画像を生成
+ */
+async function generateResultImage() {
+
+  /*
+   * フォント読み込みを待つ
+   */
+  if (document.fonts && document.fonts.ready) {
+    try {
+      await document.fonts.ready;
+    } catch (error) {
+      console.warn("Font loading failed:", error);
+    }
+  }
+
+  /*
+   * Canvasの基本設定
+   */
+ const canvas = document.createElement("canvas");
+
+canvas.width = RESULT_IMAGE.width;
+canvas.height = RESULT_IMAGE.height;
+
+const ctx = canvas.getContext("2d");
+	
+	  /*
+   * トップページと同じロゴを読み込む
+   */
+  const logo = new Image();
+
+  logo.src = "./image/logo.png";
+
+  try {
+    await logo.decode();
+  } catch (error) {
+    console.warn("Logo loading failed:", error);
+  }
+	
+
+  const colors = RESULT_IMAGE.colors;
+
+  /*
+   * 質問データ
+   */
+  const questions =
+    questionsFor(state.category);
+
+  const answered =
+    answeredCount();
+
+  /*
+   * レイアウト設定
+   */
+  const columnGap = 24;
+  const outerMargin = 42;
+
+  const columnWidth =
+    (canvas.width - outerMargin * 2 - columnGap) / 2;
+
+  const baseCardHeight = 150;
+  const rowGap = 18;
+  const sectionHeaderHeight = 54;
+  const sectionGap = 28;
+
+  /*
+   * まず各カードの高さを計算する
+   *
+   * 長い質問がある場合、
+   * その質問が入るカードだけ高さを伸ばす。
+   */
+  function getQuestionCardHeight(question) {
+
+    const padding = 22;
+    const questionWidth =
+      columnWidth - padding * 2;
+
+    const questionFont =
+      '700 17px "Zen Maru Gothic"';
+
+    const lineHeight = 25;
+
+    ctx.font = questionFont;
+
+    let lines = [];
+    let line = "";
+
+    for (const char of question.question) {
+
+      const testLine =
+        line + char;
+
+      if (
+        ctx.measureText(testLine).width >
+          questionWidth &&
+        line !== ""
+      ) {
+        lines.push(line);
+        line = char;
+      } else {
+        line = testLine;
+      }
+    }
+
+    if (line) {
+      lines.push(line);
+    }
+
+    return (
+      baseCardHeight +
+      Math.max(0, lines.length - 1) *
+        lineHeight
+    );
+  }
+
+  /*
+   * 各質問のカード高さを保存
+   */
+  const cardHeights = new Map();
+
+  questions.forEach(question => {
+    cardHeights.set(
+      question.id,
+      getQuestionCardHeight(question)
+    );
+  });
+
+  /*
+   * 全体の高さを計算
+   */
+  let currentY = 330;
+
+  const sections =
+    questionData[state.category];
+
+  sections.forEach(section => {
+
+    currentY +=
+      sectionHeaderHeight + 12;
+
+    const sectionQuestions =
+      questions.filter(
+        q => q.section === section.key
+      );
+
+    /*
+     * 2列のうち、
+     * 同じ行にあるカードの高さは
+     * 高い方に合わせる
+     */
+    for (
+      let i = 0;
+      i < sectionQuestions.length;
+      i += 2
+    ) {
+
+      const left =
+        sectionQuestions[i];
+
+      const right =
+        sectionQuestions[i + 1];
+
+      const leftHeight =
+        left
+          ? cardHeights.get(left.id)
+          : 0;
+
+      const rightHeight =
+        right
+          ? cardHeights.get(right.id)
+          : 0;
+
+      currentY +=
+        Math.max(leftHeight, rightHeight) +
+        rowGap;
+    }
+
+    currentY += sectionGap - rowGap;
+  });
+
+  /*
+   * フッター分の余白
+   */
+  const footerY =
+    currentY + 35;
+
+  const footerHeight = 90;
+
+  /*
+   * Canvasの高さを
+   * コンテンツ量に合わせて自動調整
+   */
+canvas.height = footerY + footerHeight;
+
+  /*
+   * 背景
+   */
+  ctx.fillStyle = colors.background;
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  /*
+   * 上部の紫背景
+   */
+  ctx.fillStyle =
+    colors.softPurple;
+
+  roundedRect(
+    ctx,
+    0,
+    0,
+    canvas.width,
+    310,
+    0
+  );
+
+  ctx.fill();
+
+  /*
+   * 上部アクセントライン
+   */
+  ctx.fillStyle =
+    colors.purple;
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    14
+  );
+
+  /*
+   * ロゴ
+   * トップページと同じ logo.png を
+   * 上部中央に配置
+   */
+  if (logo.complete && logo.naturalWidth > 0) {
+
+    const maxLogoWidth = 320;
+    const maxLogoHeight = 110;
+
+    const scale = Math.min(
+      maxLogoWidth / logo.naturalWidth,
+      maxLogoHeight / logo.naturalHeight
+    );
+
+    const logoWidth =
+      logo.naturalWidth * scale;
+
+    const logoHeight =
+      logo.naturalHeight * scale;
+
+    const logoX =
+      (canvas.width - logoWidth) / 2;
+
+    const logoY =
+      55 + (maxLogoHeight - logoHeight) / 2;
+
+    ctx.drawImage(
+      logo,
+      logoX,
+      logoY,
+      logoWidth,
+      logoHeight
+    );
+  }
+
+  /*
+   * カテゴリー
+   */
+  const categoryName =
+    categories[state.category]
+      ? categories[state.category].name
+      : "";
+
+  drawText(
+    ctx,
+    categoryName,
+    canvas.width / 2,
+    244,
+    {
+      font:
+        '700 22px "Zen Maru Gothic"',
+      color:
+        colors.purpleDark,
+      align: "center"
+    }
+  );
+
+  /*
+   * 質問セクション
+   */
+  currentY = 330;
+
+  sections.forEach(
+    (section, sectionIndex) => {
+
+      const sectionColor =
+        RESULT_IMAGE.colors.sections[
+          section.key
+        ];
+
+      /*
+       * セクション見出し
+       */
+      ctx.fillStyle =
+        sectionColor;
+
+      roundedRect(
+        ctx,
+        outerMargin,
+        currentY,
+        canvas.width -
+          outerMargin * 2,
+        sectionHeaderHeight,
+        18
+      );
+
+      ctx.fill();
+
+      drawText(
+        ctx,
+        "0" +
+          (sectionIndex + 1),
+        outerMargin + 24,
+        currentY + 35,
+        {
+          font:
+            '700 18px "DM Sans"',
+          color:
+            colors.white
+        }
+      );
+
+      drawText(
+        ctx,
+        section.name,
+        outerMargin + 76,
+        currentY + 34,
+        {
+          font:
+            '700 23px "Zen Maru Gothic"',
+          color:
+            colors.white
+        }
+      );
+
+      currentY +=
+        sectionHeaderHeight + 12;
+
+      /*
+       * このセクションの質問
+       */
+      const sectionQuestions =
+        questions.filter(
+          q =>
+            q.section ===
+            section.key
+        );
+
+      /*
+       * 2列で配置
+       */
+      for (
+        let i = 0;
+        i < sectionQuestions.length;
+        i += 2
+      ) {
+
+        const leftQuestion =
+          sectionQuestions[i];
+
+        const rightQuestion =
+          sectionQuestions[i + 1];
+
+        const rowHeight =
+          Math.max(
+            leftQuestion
+              ? cardHeights.get(
+                  leftQuestion.id
+                )
+              : 0,
+            rightQuestion
+              ? cardHeights.get(
+                  rightQuestion.id
+                )
+              : 0
+          );
+
+        /*
+         * 左カード
+         */
+        if (leftQuestion) {
+
+          const value =
+            Number(
+              state.answers[
+                leftQuestion.id
+              ]
+            ) || 4;
+
+          const important =
+            Boolean(
+              state.important[
+                leftQuestion.id
+              ]
+            );
+
+          drawResultQuestion(
+            ctx,
+            leftQuestion,
+            questions.indexOf(
+              leftQuestion
+            ),
+            value,
+            important,
+            outerMargin,
+            currentY,
+            columnWidth
+          );
+        }
+
+        /*
+         * 右カード
+         */
+        if (rightQuestion) {
+
+          const value =
+            Number(
+              state.answers[
+                rightQuestion.id
+              ]
+            ) || 4;
+
+          const important =
+            Boolean(
+              state.important[
+                rightQuestion.id
+              ]
+            );
+
+          drawResultQuestion(
+            ctx,
+            rightQuestion,
+            questions.indexOf(
+              rightQuestion
+            ),
+            value,
+            important,
+            outerMargin +
+              columnWidth +
+              columnGap,
+            currentY,
+            columnWidth
+          );
+        }
+
+        /*
+         * 次の行へ
+         *
+         * 左右どちらか長いカードに合わせる
+         */
+        currentY +=
+          rowHeight + rowGap;
+      }
+
+      /*
+       * 次のセクションへ
+       */
+      currentY +=
+        sectionGap - rowGap;
+    }
+  );
+
+  /*
+   * 下部メッセージ
+   */
+  const finalFooterY =
+    currentY + 35;
+
+  drawText(
+    ctx,
+    "違いを、対話のきっかけに。",
+    canvas.width / 2,
+    finalFooterY - 35,
+    {
+      font:
+        '700 25px "Zen Maru Gothic"',
+      color:
+        colors.purpleDark,
+      align:
+        "center"
+    }
+  );
+
+  drawText(
+    ctx,
+    "この結果に正解はありません。ふたりで話すきっかけにしてみてください。",
+    canvas.width / 2,
+    finalFooterY + 8,
+    {
+      font:
+        '500 17px "Zen Maru Gothic"',
+      color:
+        colors.muted,
+      align:
+        "center"
+    }
+  );
+
+  /*
+   * ロゴ代わりのサイト名
+   */
+  drawText(
+    ctx,
+    "BIAN LAB · VALUES CHECK",
+    canvas.width / 2,
+    finalFooterY + 50,
+    {
+      font:
+        '700 15px "DM Sans"',
+      color:
+        colors.purple,
+      align:
+        "center"
+    }
+  );
+
+  return canvas;
+}
+		
+
+
+
+
+/**
+ * Canvas → PNG Blob
+ */
+function canvasToBlob(canvas) {
+  return new Promise((resolve, reject) => {
+
+    if (!canvas) {
+      reject(new Error("Canvasが存在しません"));
+      return;
+    }
+
+    if (!canvas.width || !canvas.height) {
+      reject(
+        new Error(
+          "Canvasサイズが不正です: " +
+          canvas.width + " × " + canvas.height
+        )
+      );
+      return;
+    }
+
+    console.log(
+      "Canvas生成完了:",
+      canvas.width,
+      "×",
+      canvas.height
+    );
+
+    try {
+      canvas.toBlob(
+        blob => {
+          if (!blob) {
+            reject(
+              new Error("canvas.toBlob() がBlobを返しませんでした")
+            );
+            return;
+          }
+
+          console.log(
+            "PNG生成完了:",
+            blob.size,
+            "bytes"
+          );
+
+          resolve(blob);
+        },
+        "image/png"
+      );
+    } catch (error) {
+      reject(error);
+    }
+
+  });
+}
+
+
+async function saveResultImage(
+  buttonId = "save-result-image",
+  feedbackId = "result-image-feedback"
+) {
+
+  const button = $(buttonId);
+  const feedback = $(feedbackId);
+
+  if (!button) {
+    console.error("ボタンが見つかりません:", buttonId);
+    return;
+  }
+
+  if (!feedback) {
+    console.error("フィードバック欄が見つかりません:", feedbackId);
+  }
+
+  button.disabled = true;
+  button.textContent = "結果画像を作成中…";
+
+  if (feedback) {
+    feedback.textContent = "";
+  }
+
+  try {
+
+    console.log("① Canvas生成開始");
+
+    const canvas = await generateResultImage();
+
+    console.log(
+      "② Canvas生成完了",
+      canvas.width,
+      canvas.height
+    );
+
+    console.log("③ PNG変換開始");
+
+    const blob = await canvasToBlob(canvas);
+
+    console.log("④ PNG変換完了", blob.size);
+
+    const fileName = "bian-lab-values-check.png";
+
+    const file = new File(
+      [blob],
+      fileName,
+      {
+        type: "image/png"
+      }
+    );
+
+    console.log("⑤ File作成完了");
+
+    /*
+     * スマホ：共有シート
+     */
+    if (
+      navigator.share &&
+      navigator.canShare &&
+      navigator.canShare({
+        files: [file]
+      })
+    ) {
+
+      console.log("⑥ 共有シートを開きます");
+
+      await navigator.share({
+        title: "びあんラボ 本音の価値観チェック",
+        text: "本音の価値観チェックの結果",
+        files: [file]
+      });
+
+      if (feedback) {
+        feedback.textContent = "共有画面を開きました";
+      }
+
+      return;
+    }
+
+    /*
+     * PC：ダウンロード
+     */
+    console.log("⑥ ダウンロード開始");
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = fileName;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 1000);
+
+    if (feedback) {
+      feedback.textContent = "PNG画像を保存しました";
+    }
+
+    console.log("⑦ ダウンロード完了");
+
+  } catch (error) {
+
+    console.error(
+      "=============================="
+    );
+    console.error(
+      "結果画像生成エラー"
+    );
+    console.error(error);
+    console.error(
+      "message:",
+      error?.message
+    );
+    console.error(
+      "name:",
+      error?.name
+    );
+    console.error(
+      "stack:",
+      error?.stack
+    );
+    console.error(
+      "=============================="
+    );
+
+    if (feedback) {
+      feedback.textContent =
+        "画像生成エラー：" +
+        (error?.message || "原因不明");
+    }
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "画像で結果を保存";
+
+  }
+}
+
+function renderResults() {
+  const category = state.category;
+  const questions = questionsFor(category);
+
+  $("summary-category").textContent =
+    categories[category].name;
+
+  $("summary-status").textContent =
+    answeredCount() + " / " + questions.length + " 回答済み";
+
+  $("result-list").innerHTML = "";
+
+  questions.forEach((question, index) => {
+
+    const item = document.createElement("article");
+
+    const important =
+      Boolean(state.important[question.id]);
+
+    const answerValue =
+      Number(state.answers[question.id]) || 4;
+
+
+    item.className =
+      "result-card soft-shadow" +
+      (important ? " important-result" : "");
+    item.dataset.section = question.section;
+    item.style.setProperty("--section-color", sectionStyles[question.section].color);
+    item.dataset.section = question.section;
+    item.style.setProperty("--section-color", sectionStyles[question.section].color);
+
+
+    /*
+     * 1〜7をパーセント位置に変換
+     * 1 = 0%
+     * 4 = 50%
+     * 7 = 100%
+     */
+    const position =
+      ((answerValue - 1) / 6) * 100;
+
+
+    item.innerHTML = `
+
+      <p class="question-number">
+        ${important
+          ? (question.special === "hasChildren"
+            ? "✓ 子供がいる · 質問 " + (index + 1)
+            : "★ 自分的に重要 · 質問 " + (index + 1))
+          : "質問 " + (index + 1)
+        }
+      </p>
+
+      <h3 class="result-question"></h3>
+
+
+      <div class="result-scale">
+
+        <div class="result-scale-labels">
+          <span class="left"></span>
+          <span class="right"></span>
+        </div>
+
+
+        <div class="result-scale-track">
+
+          <div class="result-scale-line"></div>
+
+          <div class="result-scale-ticks">
+            <span class="result-scale-tick"></span>
+            <span class="result-scale-tick"></span>
+            <span class="result-scale-tick"></span>
+            <span class="result-scale-tick center"></span>
+            <span class="result-scale-tick"></span>
+            <span class="result-scale-tick"></span>
+            <span class="result-scale-tick"></span>
+          </div>
+
+
+          <div
+            class="result-scale-marker"
+            data-value="${answerValue}"
+            style="left: ${position}%"
+          ></div>
+
+        </div>
+
+
+        <p class="result-answer"></p>
+
+      </div>
+
+
+      ${
+        important
+          ? `<span class="result-important">${question.special === "hasChildren" ? "✓ 子供がいる" : "★ 自分的に重要！"}</span>`
+          : ""
+      }
+
+
+      <p class="discussion">
+        <strong>話してみるヒント：</strong>
+      </p>
+
+    `;
+
+
+    /*
+     * 質問文
+     */
+    item.querySelector(
+      ".result-question"
+    ).textContent =
+      question.question;
+
+
+    /*
+     * 左右の価値観
+     */
+    item.querySelector(
+      ".result-scale-labels .left"
+    ).textContent =
+      question.leftLabel;
+
+    item.querySelector(
+      ".result-scale-labels .right"
+    ).textContent =
+      question.rightLabel;
+
+
+    /*
+     * 選択内容
+     */
+    item.querySelector(
+      ".result-answer"
+    ).textContent =
+      responseText(question);
+
+
+    /*
+     * 話してみるヒント
+     */
+    item.querySelector(
+      ".discussion"
+    ).append(
+      document.createTextNode(
+        question.discussion
+      )
+    );
+
+
+    $("result-list").appendChild(item);
+
+  });
+
+}
+
+    function shareUrl() {
+      return window.location.href;
+    }
+
+    function setShareFeedback(id, message) {
+      const el = $(id);
+      if (el) el.textContent = message || "";
+    }
+
+    async function copyLink(feedbackId = "share-feedback") {
+      try {
+        await navigator.clipboard.writeText(shareUrl());
+        setShareFeedback(feedbackId, "リンクをコピーしました");
+      } catch {
+        setShareFeedback(feedbackId, "コピーできませんでした。URLを選択してコピーしてください。");
+      }
+    }
+
+    async function shareGeneric(feedbackId = "share-feedback") {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "びあんラボ 本音の価値観チェック",
+            url: shareUrl()
+          });
+          setShareFeedback(feedbackId, "共有画面を開きました");
+          return;
+        } catch (error) {
+          if (error.name === "AbortError") return;
+        }
+      }
+      await copyLink(feedbackId);
+    }
+
+    function bindShareControls(suffix = "") {
+      const id = suffix ? "-" + suffix : "";
+      const feedbackId = "share-feedback" + id;
+      const xButton = $("share-x" + id);
+      const lineButton = $("share-line" + id);
+      const linkButton = $("share-link" + id);
+
+      if (xButton) {
+        xButton.addEventListener("click", () => {
+          const shareText = "#びあんラボの本音メーカー";
+          window.open(
+            "https://twitter.com/intent/tweet?text=" +
+            encodeURIComponent(shareText) +
+            "&url=" + encodeURIComponent(shareUrl()),
+            "_blank", "noopener,noreferrer"
+          );
+        });
+      }
+
+      if (lineButton) {
+        lineButton.addEventListener("click", async () => {
+          if (navigator.share) {
+            await shareGeneric(feedbackId);
+            return;
+          }
+          window.open(
+            "https://social-plugins.line.me/lineit/share?url=" +
+            encodeURIComponent(shareUrl()),
+            "_blank", "noopener,noreferrer"
+          );
+          setShareFeedback(feedbackId, "LINEの共有画面を開きました");
+        });
+      }
+
+      if (linkButton) {
+        linkButton.addEventListener("click", () => shareGeneric(feedbackId));
+      }
+    }
+
+    function handleRoute() {
+      const path = currentPath();
+      if (path === "/" || !path) {
+        showView("top-view");
+        return;
+      }
+      const match = path.match(/^\/(student|working)(\/result)?$/);
+      if (!match) { route("/"); return; }
+      startCategory(match[1]);
+      if (match[2]) {
+        showView("result-view");
+        renderResults();
+      } else {
+        showView("questions-view");
+      }
+    }
+
+    document.querySelectorAll("[data-category]").forEach(button => {
+      button.addEventListener("click", () => route("/" + button.dataset.category));
+    });
+    $("back-home").addEventListener("click", () => route("/"));
+    $("back-answers").addEventListener("click", () => route("/" + state.category));
+    $("show-result-button").addEventListener("click", attemptResult);
+
+    // トップ画面のシェア
+    $("share-top-button").addEventListener("click", () => shareGeneric("share-top-feedback"));
+
+    // 結果画面の上下2か所にシェア処理を適用
+    bindShareControls("top");
+    bindShareControls();
+
+    // 結果画像保存も上下2か所に対応
+    $("save-result-image").addEventListener("click", () => {
+      saveResultImage("save-result-image", "result-image-feedback");
+    });
+    $("save-result-image-top").addEventListener("click", () => {
+      saveResultImage("save-result-image-top", "result-image-feedback-top");
+    });
+
+    window.addEventListener("hashchange", handleRoute);
+    handleRoute();
+    lucide.createIcons();
+  </script>
+ 
+</body></html>
