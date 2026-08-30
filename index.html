@@ -744,6 +744,18 @@
   position: relative;
   z-index: 1;
 }
+
+/* ===== 今回の修正 ===== */
+#result-view .shell { padding-bottom: 70px; }
+.result-maker-button { display:block; width:min(100%,420px); margin:18px auto 8px; padding:0; border:0; background:transparent; box-shadow:none; }
+.result-maker-button img { display:block; width:100%; height:auto; object-fit:contain; transition:transform .15s ease, opacity .15s ease; }
+.result-maker-button:hover img { transform:translateY(-2px); }
+.result-maker-button:active img { transform:translateY(0); }
+.result-maker-button:disabled { cursor:wait; }
+.result-footer { margin-top:64px; padding:42px 20px 50px; text-align:center; color:#1b4c91; }
+.result-footer .footer-logo img { width:120px; max-width:40%; margin-bottom:20px; }
+.result-footer .footer-copy { font-size:.78rem; line-height:2; font-weight:700; }
+.answers-section { margin-top:58px; }
   </style>
   <script src="/_sdk/b3bf9e8ac58e6ad6.data_sdk.js" type="text/javascript" integrity="sha512-otc1u9NYq9Ms5Jt//7vmhrrqR5CLPr8Jdgs6741gqniClfLMcfmC+jK/cKuQdhLv6G0esJ/FzaMS9tv0T/vj/Q=="></script>
   <script src="/_sdk/a27879be4562f807.resizing_sdk.js" type="text/javascript" integrity="sha512-trcxRwz+QLrzK0Dqg95xqVRryR7WtWui2YopXyzOIr3WMde3j/xCRgT63/b/EAg7klDsAOuHzoRgoryhwm8QFw=="></script>
@@ -866,148 +878,63 @@
    <section id="result-view" class="view">
     <div class="shell">
      <button type="button" id="back-answers" class="back-link"><i data-lucide="arrow-left" width="18"></i><span data-template-id="back-answers-label" class="canva-text" style="color: rgb(116, 116, 129); font-weight: 700; font-style: normal; font-size: 16px;">回答を編集する</span></button>
-     <header>
-   
-     <img src="image/result.png" alt="びあんラボ" class="result-logo">
-		 
-      <p data-template-id="result-copy" class="canva-text page-copy" style="color: rgb(116, 116, 129); font-weight: 400; font-style: normal; font-size: 16px;">これは診断結果ではなく、あなたが選んだ今の気持ちです。気になる項目から、ふたりで話してみてください。</p>
-     </header>
+     <header><img src="image/result.png" alt="びあんラボ" class="result-logo"></header>
+
      <section class="summary-card soft-shadow" aria-label="回答サマリー">
-      <p data-template-id="summary-brand" class="canva-text summary-brand" style="color: rgb(54, 125, 105); font-weight: 700; font-style: normal; font-size: 16px;">ここから話してみよう</p>
-      <h2 data-template-id="summary-title" class="canva-text summary-title" style="color: rgb(49, 49, 59); font-weight: 700; font-style: normal; font-size: 24px;">話し合いのヒント</h2>
+      <p data-template-id="summary-brand" class="canva-text summary-brand">本音メーカーで画像を生成して</p>
+      <h2 data-template-id="summary-title" class="canva-text summary-title">自分の価値観をシェアしよう</h2>
+      <button id="save-result-image-top" type="button" class="result-maker-button" aria-label="本音メーカーで画像を生成する">
+       <img src="image/maker.png" alt="本音メーカーで画像を生成する">
+      </button>
+      <p id="result-image-feedback-top" class="result-image-feedback" aria-live="polite"></p>
       <div class="summary-meta">
-       <div><small data-template-id="summary-category-label" class="canva-text" style="color: rgb(116, 116, 129); font-weight: 400; font-style: normal; font-size: 16px;">対象カテゴリー</small><strong id="summary-category"></strong>
-       </div>
-       <div><small data-template-id="summary-status-label" class="canva-text" style="color: rgb(116, 116, 129); font-weight: 400; font-style: normal; font-size: 16px;">回答済み状況</small><strong id="summary-status"></strong>
-       </div>
+       <div><small data-template-id="summary-category-label" class="canva-text">2人で結果を見ながら話してみよう</small><strong id="summary-category"></strong></div>
+       <div><small data-template-id="summary-status-label" class="canva-text">1人で自己理解を深めよう</small></div>
       </div>
      </section>
- 
-		<!-- 結果シェア（上） -->
-<section class="share-card soft-shadow result-share-top" aria-labelledby="share-heading-top">
-  <h2 id="share-heading-top" class="canva-text text-xl font-bold mb-2">
-    結果をシェアする
-  </h2>
 
-  <p class="page-copy mb-4">
-    ふたりでやってみたことを共有したり、あとで見返したりできます。
-  </p>
+     <section class="share-card soft-shadow result-share-top" aria-labelledby="share-heading-top">
+      <h2 id="share-heading-top" class="canva-text text-xl font-bold mb-2">結果をシェアする</h2>
+      <p class="page-copy mb-4">#びあんラボの本音メーカー でSNSや友達に価値観をを共有しよう</p>
+      <div class="share-buttons">
+       <button id="share-x-top" type="button" class="share-button x">Xで共有</button>
+       <button id="share-line-top" type="button" class="share-button">LINEで共有</button>
+       <button id="share-link-top" type="button" class="share-button">リンクを共有</button>
+      </div>
+      <p id="share-feedback-top" class="share-feedback" aria-live="polite"></p>
+     </section>
 
-  <button
-    id="save-result-image-top"
-    type="button"
-    class="result-image-button"
-  >
-    画像で結果を保存
-  </button>
+     <section class="answers-section" aria-labelledby="answers-heading">
+      <h2 id="answers-heading">あなたの回答一覧</h2>
+      <div id="result-list"></div>
+     </section>
 
-  <p
-    id="result-image-feedback-top"
-    class="result-image-feedback"
-    aria-live="polite"
-  ></p>
-
-  <div class="share-buttons">
-    <button
-      id="share-x-top"
-      type="button"
-      class="share-button x"
-    >
-      Xで共有
-    </button>
-
-    <button
-      id="share-line-top"
-      type="button"
-      class="share-button"
-    >
-      LINEで共有
-    </button>
-
-    <button
-      id="share-link-top"
-      type="button"
-      class="share-button"
-    >
-      リンクを共有
-    </button>
-  </div>
-
-  <p id="share-feedback-top" class="share-feedback" aria-live="polite"></p>
-</section>
-
-<section aria-labelledby="answers-heading">
-  <h2 id="answers-heading" ...>あなたの回答一覧</h2>
-  <div id="result-list"></div>
-</section>
-		
      <aside class="talk-card">
-      <h2 data-template-id="talk-title" class="canva-text text-xl font-bold" style="color: rgb(64, 59, 87); font-weight: 700; font-style: normal; font-size: 24px;">違いを、対話のきっかけに</h2>
+      <h2 data-template-id="talk-title" class="canva-text text-xl font-bold">違いを、対話のきっかけに</h2>
+      <p class="page-copy" style="margin:12px 0 0;">これは診断結果ではなく、あなたが選んだ結果です。</p>
       <ul>
-       <li data-template-id="talk-point-1" class="canva-text" style="color: rgb(81, 77, 107); font-weight: 400; font-style: normal; font-size: 16px;">違うこと自体は、問題ではありません。</li>
-       <li data-template-id="talk-point-2" class="canva-text" style="color: rgb(81, 77, 107); font-weight: 400; font-style: normal; font-size: 16px;">「なぜそう思うの？」を、やさしく聞いてみましょう。</li>
-       <li data-template-id="talk-point-3" class="canva-text" style="color: rgb(81, 77, 107); font-weight: 400; font-style: normal; font-size: 16px;">★をつけた、自分的に重要な項目から重点的に話してみるのもおすすめです。</li>
-       <li data-template-id="talk-point-4" class="canva-text" style="color: rgb(81, 77, 107); font-weight: 400; font-style: normal; font-size: 16px;">相手を説得するより、まずは理解することを大切に。</li>
+       <li data-template-id="talk-point-1" class="canva-text">違うこと自体は、問題ではありません。</li>
+       <li data-template-id="talk-point-2" class="canva-text">「なぜそう思うの？」を、やさしく聞いてみましょう。</li>
+       <li data-template-id="talk-point-3" class="canva-text">★をつけた、自分的に重要な項目から重点的に話してみるのもおすすめです。</li>
+       <li data-template-id="talk-point-4" class="canva-text">相手を説得するより、まずは理解することを大切に。</li>
       </ul>
      </aside>
-    <section class="share-card soft-shadow" aria-labelledby="share-heading">
-  <h2 id="share-heading" data-template-id="share-title" class="canva-text text-xl font-bold mb-2" style="color: rgb(49, 49, 59); font-weight: 700; font-style: normal; font-size: 24px;">
-    結果をシェアする
-  </h2>
 
-  <p data-template-id="share-copy" class="canva-text page-copy mb-4" style="color: rgb(116, 116, 129); font-weight: 400; font-style: normal; font-size: 16px;">
-    ふたりでやってみたことを共有したり、あとで見返したりできます。
-  </p>
+     <section class="share-card soft-shadow" aria-labelledby="share-heading">
+      <h2 id="share-heading" data-template-id="share-title" class="canva-text text-xl font-bold mb-2">結果をシェアする</h2>
+      <p data-template-id="share-copy" class="canva-text page-copy mb-4">#びあんラボの本音メーカー でSNSや友達に価値観をを共有しよう</p>
+      <div class="share-buttons">
+       <button id="share-x" type="button" data-template-id="share-x-button" class="canva-button share-button x">Xで共有</button>
+       <button id="share-line" type="button" data-template-id="share-line-button" class="canva-button share-button">LINEで共有</button>
+       <button id="share-link" type="button" data-template-id="share-link-button" class="canva-button share-button">リンクを共有</button>
+      </div>
+      <p id="share-feedback" class="share-feedback" aria-live="polite"></p>
+     </section>
 
-  <!-- 結果画像保存 -->
-  <button
-    id="save-result-image"
-    type="button"
-    class="result-image-button"
-  >
-    画像で結果を保存
-  </button>
-
-  <p
-    id="result-image-feedback"
-    class="result-image-feedback"
-    aria-live="polite"
-  ></p>
-
-  <div class="share-buttons">
-    <button
-      id="share-x"
-      type="button"
-      data-template-id="share-x-button"
-      class="canva-button share-button x"
-      style="background: rgb(36, 36, 36); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;"
-    >
-      Xで共有
-    </button>
-
-    <button
-      id="share-line"
-      type="button"
-      data-template-id="share-line-button"
-      class="canva-button share-button"
-      style="background: rgb(255, 255, 255); color: rgb(49, 49, 59); font-weight: 700; font-style: normal; font-size: 16px;"
-    >
-      LINEで共有
-    </button>
-
-    <button
-      id="share-link"
-      type="button"
-      data-template-id="share-link-button"
-      class="canva-button share-button"
-      style="background: rgb(255, 255, 255); color: rgb(49, 49, 59); font-weight: 700; font-style: normal; font-size: 16px;"
-    >
-      リンクを共有
-    </button>
-  </div>
-
-  <p id="share-feedback" class="share-feedback" aria-live="polite"></p>
-</section>
+     <footer class="result-footer">
+      <a href="https://bian-lab.jp/" class="footer-logo" target="_blank" rel="noopener noreferrer"><img src="./image/logo3.png" alt="BIAN LAB"></a>
+      <div class="footer-copy"><p>レズビアンのためのwebメディア「びあんラボ」</p><p>@2026 bian Lab.</p></div>
+     </footer>
     </div>
    </section>
   </main>
@@ -1810,7 +1737,7 @@ const ctx = canvas.getContext("2d");
   /*
    * 全体の高さを計算
    */
-  let currentY = 330;
+  let currentY = 245;
 
   const sections =
     questionData[state.category];
@@ -1866,7 +1793,7 @@ const ctx = canvas.getContext("2d");
   const footerY =
     currentY + 35;
 
-  const footerHeight = 90;
+  const footerHeight = 150;
 
   /*
    * Canvasの高さを
@@ -1875,109 +1802,41 @@ const ctx = canvas.getContext("2d");
 canvas.height = footerY + footerHeight;
 
   /*
-   * 背景
+   * 背景：TOPと同じ方眼紙
    */
   ctx.fillStyle = colors.background;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const gridSize = 72;
+  ctx.strokeStyle = "rgba(160,160,160,.28)";
+  ctx.lineWidth = 2;
+  for (let x=0; x<=canvas.width; x+=gridSize) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
+  for (let y=0; y<=canvas.height; y+=gridSize) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
 
-  ctx.fillRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-  /*
-   * 上部の紫背景
-   */
-  ctx.fillStyle =
-    colors.softPurple;
-
-  roundedRect(
-    ctx,
-    0,
-    0,
-    canvas.width,
-    310,
-    0
-  );
-
-  ctx.fill();
+  /* 上部：TOPと同じ紫＋白い丸フリル */
+  const headerHeight = 225;
+  ctx.fillStyle = "#d9cde8";
+  ctx.fillRect(0,0,canvas.width,headerHeight);
+  ctx.fillStyle = colors.background;
+  for (let x=0; x<canvas.width; x+=96) { ctx.beginPath(); ctx.arc(x+48,headerHeight,48,Math.PI,0,false); ctx.fill(); }
+  ctx.fillStyle = colors.purple;
+  ctx.fillRect(0,0,canvas.width,10);
 
   /*
-   * 上部アクセントライン
-   */
-  ctx.fillStyle =
-    colors.purple;
-
-  ctx.fillRect(
-    0,
-    0,
-    canvas.width,
-    14
-  );
-
-  /*
-   * ロゴ
-   * トップページと同じ logo.png を
-   * 上部中央に配置
+   * タイトル：左にロゴ、右に対象カテゴリ
    */
   if (logo.complete && logo.naturalWidth > 0) {
-
-    const maxLogoWidth = 320;
-    const maxLogoHeight = 110;
-
-    const scale = Math.min(
-      maxLogoWidth / logo.naturalWidth,
-      maxLogoHeight / logo.naturalHeight
-    );
-
-    const logoWidth =
-      logo.naturalWidth * scale;
-
-    const logoHeight =
-      logo.naturalHeight * scale;
-
-    const logoX =
-      (canvas.width - logoWidth) / 2;
-
-    const logoY =
-      55 + (maxLogoHeight - logoHeight) / 2;
-
-    ctx.drawImage(
-      logo,
-      logoX,
-      logoY,
-      logoWidth,
-      logoHeight
-    );
+    const maxLogoWidth=420, maxLogoHeight=120;
+    const scale=Math.min(maxLogoWidth/logo.naturalWidth,maxLogoHeight/logo.naturalHeight);
+    const logoWidth=logo.naturalWidth*scale, logoHeight=logo.naturalHeight*scale;
+    ctx.drawImage(logo, outerMargin+10, 52+(maxLogoHeight-logoHeight)/2, logoWidth, logoHeight);
   }
-
-  /*
-   * カテゴリー
-   */
-  const categoryName =
-    categories[state.category]
-      ? categories[state.category].name
-      : "";
-
-  drawText(
-    ctx,
-    categoryName,
-    canvas.width / 2,
-    244,
-    {
-      font:
-        '700 22px "Zen Maru Gothic"',
-      color:
-        colors.purpleDark,
-      align: "center"
-    }
-  );
+  const categoryName=categories[state.category] ? categories[state.category].name : "";
+  drawText(ctx,categoryName,canvas.width-outerMargin-10,118,{font:'700 30px "Zen Maru Gothic"',color:colors.purpleDark,align:"right"});
 
   /*
    * 質問セクション
    */
-  currentY = 330;
+  currentY = 245;
 
   sections.forEach(
     (section, sectionIndex) => {
@@ -2162,56 +2021,16 @@ canvas.height = footerY + footerHeight;
   /*
    * 下部メッセージ
    */
-  const finalFooterY =
-    currentY + 35;
+  const finalFooterY=currentY+35;
+  drawText(ctx,"違いを、対話のきっかけに。",canvas.width/2,finalFooterY-35,{font:'700 25px "Zen Maru Gothic"',color:colors.purpleDark,align:"center"});
+  drawText(ctx,"これは診断結果ではなく、あなたが選んだ結果です。",canvas.width/2,finalFooterY+8,{font:'500 17px "Zen Maru Gothic"',color:colors.muted,align:"center"});
 
-  drawText(
-    ctx,
-    "違いを、対話のきっかけに。",
-    canvas.width / 2,
-    finalFooterY - 35,
-    {
-      font:
-        '700 25px "Zen Maru Gothic"',
-      color:
-        colors.purpleDark,
-      align:
-        "center"
-    }
-  );
-
-  drawText(
-    ctx,
-    "この結果に正解はありません。ふたりで話すきっかけにしてみてください。",
-    canvas.width / 2,
-    finalFooterY + 8,
-    {
-      font:
-        '500 17px "Zen Maru Gothic"',
-      color:
-        colors.muted,
-      align:
-        "center"
-    }
-  );
-
-  /*
-   * ロゴ代わりのサイト名
-   */
-  drawText(
-    ctx,
-    "BIAN LAB · VALUES CHECK",
-    canvas.width / 2,
-    finalFooterY + 50,
-    {
-      font:
-        '700 15px "DM Sans"',
-      color:
-        colors.purple,
-      align:
-        "center"
-    }
-  );
+  /* 下部：TOPと同じ紫＋白い丸フリル */
+  const bottomTop=canvas.height-115;
+  ctx.fillStyle="#d9cde8";
+  ctx.fillRect(0,bottomTop,canvas.width,canvas.height-bottomTop);
+  ctx.fillStyle=colors.background;
+  for (let x=0; x<canvas.width; x+=96) { ctx.beginPath(); ctx.arc(x+48,bottomTop,48,0,Math.PI,false); ctx.fill(); }
 
   return canvas;
 }
@@ -2294,7 +2113,8 @@ async function saveResultImage(
   }
 
   button.disabled = true;
-  button.textContent = "結果画像を作成中…";
+  const buttonImage = button.querySelector("img");
+  if (buttonImage) buttonImage.style.opacity = "0.65";
 
   if (feedback) {
     feedback.textContent = "";
@@ -2418,7 +2238,7 @@ async function saveResultImage(
   } finally {
 
     button.disabled = false;
-    button.textContent = "画像で結果を保存";
+    button.textContent = "本音メーカーで画像を作る！";
 
   }
 }
@@ -2426,12 +2246,6 @@ async function saveResultImage(
 function renderResults() {
   const category = state.category;
   const questions = questionsFor(category);
-
-  $("summary-category").textContent =
-    categories[category].name;
-
-  $("summary-status").textContent =
-    answeredCount() + " / " + questions.length + " 回答済み";
 
   $("result-list").innerHTML = "";
 
@@ -2684,10 +2498,7 @@ function renderResults() {
     bindShareControls("top");
     bindShareControls();
 
-    // 結果画像保存も上下2か所に対応
-    $("save-result-image").addEventListener("click", () => {
-      saveResultImage("save-result-image", "result-image-feedback");
-    });
+    // 結果画像生成は上部のmaker.pngボタンのみ
     $("save-result-image-top").addEventListener("click", () => {
       saveResultImage("save-result-image-top", "result-image-feedback-top");
     });
