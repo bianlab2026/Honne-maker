@@ -299,7 +299,7 @@
     .notice { display: none; margin: 0 0 18px; padding: 14px 16px; border-radius: 15px; background: #fff0d9; color: #78520d; font-size: .9rem; font-weight: 700; }
     .notice.show { display: flex; gap: 9px; align-items: center; }
 
-    .question-card { margin: 0 0 18px; padding: 22px 18px; background: #fff; border: 1px solid var(--line); border-radius: 24px; }
+    .question-card { margin: 0 0 18px; padding: 22px 18px; background: #fff; border: 3px solid #1b4c91;; border-radius: 24px; }
     .question-card > * + * { border-top: 1px solid var(--line); padding-top: 16px; }
     .question-card .question-title { border-top: 0; padding-top: 0; }
     .question-card.unanswered { border-color: #e6b64a; }
@@ -336,9 +336,9 @@
     .primary-button { width: 100%; border: 0; border-radius: 17px; padding: 17px; color: #fff; background: var(--coral); font-weight: 700; font-size: 1rem; box-shadow: 0 7px 16px rgba(203,86,71,.22); }
     .primary-button:hover { background: var(--coral-dark); }
 
-    .summary-card { padding: 22px; border-radius: 25px; background: var(--mint); margin: 20px 0 26px; }
-    .summary-brand { color: var(--mint-dark); font-size: .84rem; font-weight: 700; }
-    .summary-title { margin: 5px 0 17px; font-size: 1.35rem; }
+    .summary-card { padding: 22px; border-radius: 25px; background: #E0EFFF; margin: 20px 0 26px; }
+    .summary-brand { color: #0D4383; font-size: .84rem; font-weight: 700; }
+    .summary-title { color: #0D4383; margin: 5px 0 17px; font-size: 1.35rem; font-weight: 700 }
     .summary-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .summary-meta div { padding: 12px; border-radius: 14px; background: rgba(255,255,255,.72); }
     .summary-meta small { display: block; color: var(--muted); font-size: .72rem; }
@@ -573,9 +573,43 @@
     .share-card { padding: 22px; border-radius: 25px; background: #fff; border: 1px solid var(--line); }
     .share-textarea { width: 100%; min-height: 100px; padding: 13px; resize: vertical; border: 1px solid #dcd4cf; border-radius: 14px; color: var(--ink); background: #fffdfb; line-height: 1.65; font-size: .9rem; }
     .share-buttons { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
-    .share-button { min-height: 48px; border: 1px solid #ded7d1; border-radius: 14px; background: #fff; color: var(--ink); font-weight: 700; }
-    .share-button.x { border-color: #242424; color: #fff; background: #242424; }
-    .share-feedback { min-height: 22px; margin: 12px 0 0; color: var(--mint-dark); font-size: .82rem; font-weight: 700; }
+	  
+  .share-button {
+  min-height: 48px;
+  border: 1px solid #ded7d1;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.share-button.x {
+  border-color: #242424;
+  color: #fff;
+  background: #242424;
+}
+
+/* LINE */
+.share-button[id="share-line"],
+.share-button[id="share-line-top"] {
+  border-color: #06C755;
+  color: #fff;
+  background: #06C755;
+}
+
+.share-button[id="share-line"]:hover,
+.share-button[id="share-line-top"]:hover {
+  background: #05B84D;
+  border-color: #05B84D;
+}
+
+.share-feedback {
+  min-height: 22px;
+  margin: 12px 0 0;
+  color: var(--mint-dark);
+  font-size: .82rem;
+  font-weight: 700;
+}
 
     @media (min-width: 680px) {
       .top-shell { padding-top: 38px; }
@@ -767,11 +801,319 @@
 .result-maker-button:hover img { transform:translateY(-2px); }
 .result-maker-button:active img { transform:translateY(0); }
 .result-maker-button:disabled { cursor:wait; }
-.result-footer { margin-top:64px; padding:42px 20px 50px; text-align:center; color:#1b4c91; }
-.result-footer .footer-logo img { width:120px; max-width:40%; margin-bottom:20px; }
-.result-footer .footer-copy { font-size:.78rem; line-height:2; font-weight:700; }
+	  
+.result-footer {
+  margin-top: 64px;
+  padding: 42px 20px 50px;
+  text-align: center;
+  color: #1b4c91;
+
+  transform: translateY(70px);
+}
+
+.result-footer .footer-logo img {
+  width: 120px;
+  max-width: 40%;
+  margin-bottom: 20px;
+}
+
+.result-footer .footer-copy {
+  font-size: .78rem;
+  line-height: 2;
+  font-weight: 700;
+}
 .answers-section { margin-top:58px; }
+	  
+/* ========================================
+   あなたの回答一覧
+   重なったカードを左右ボタンでめくる
+======================================== */
+
+.answers-section {
+  margin-top: 58px;
+}
+
+.result-book-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 24px auto 0;
+
+  padding: 0 54px;
+  box-sizing: border-box;
+}
+
+.result-book {
+  position: relative;
+  width: 100%;
+
+  height: 500px;
+
+  overflow: visible;
+}
+
+/* =========================
+   カード
+========================= */
+
+.result-book .result-card {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  border-radius: 18px;
+
+  padding: 30px 26px;
+
+  background: #fffdf9;
+
+  /* 枠線は全周 */
+  border: 2px solid var(--section-color, #d8d1e4);
+
+  box-shadow:
+    0 8px 18px rgba(78, 50, 36, .10);
+
+  transform-origin: center center;
+
+  transition:
+    transform .42s cubic-bezier(.22,.61,.36,1),
+    opacity .42s ease,
+    box-shadow .42s ease;
+
+  will-change: transform, opacity;
+
+  overflow: hidden;
+}
+
+/* =========================
+   後ろに重なるカード
+========================= */
+
+.result-book .result-card.stack-1 {
+  transform:
+    translateY(8px)
+    scale(.965);
+
+  z-index: 1;
+
+  opacity: .9;
+}
+
+.result-book .result-card.stack-2 {
+  transform:
+    translateY(16px)
+    scale(.93);
+
+  z-index: 0;
+
+  opacity: .75;
+}
+
+/* 手前のカード */
+.result-book .result-card.stack-front {
+  z-index: 10;
+
+  transform: translate(0, 0) scale(1);
+
+  opacity: 1;
+
+  box-shadow:
+    0 12px 28px rgba(78, 50, 36, .14);
+}
+
+/* =========================
+   左右ボタン
+========================= */
+
+.result-book-button {
+  position: absolute;
+
+  top: 50%;
+  z-index: 30;
+
+  width: 44px;
+  height: 44px;
+
+  transform: translateY(-50%);
+
+  border: 2px solid #d8d1e4;
+  border-radius: 50%;
+
+  background: #fff;
+
+  color: #6f6286;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  font-size: 24px;
+  line-height: 1;
+
+  box-shadow:
+    0 5px 12px rgba(78, 50, 36, .12);
+
+  transition:
+    transform .15s ease,
+    background .15s ease,
+    box-shadow .15s ease;
+}
+
+.result-book-button:hover {
+  background: #f7f3fb;
+
+  box-shadow:
+    0 7px 16px rgba(78, 50, 36, .16);
+}
+
+.result-book-button:active {
+  transform:
+    translateY(-50%)
+    scale(.94);
+}
+
+.result-book-button.prev {
+  left: 0;
+}
+
+.result-book-button.next {
+  right: 0;
+}
+
+/* ボタン無効 */
+.result-book-button:disabled {
+  opacity: .25;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* =========================
+   重要カード
+========================= */
+.result-book .result-card.important-result {
+  border: 2px solid var(--section-color, #d8d1e4);
+  background: #fffdf9;
+}
+/* 重要カードの付箋 */
+.result-important {
+  position: absolute;
+  top: 18px;
+  right: -8px;
+
+  z-index: 5;
+
+  padding: 7px 14px;
+
+  border-radius: 10px 0 0 10px;
+
+  background: #e3ae37;
+  color: #fff;
+
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+  box-shadow: 0 3px 7px rgba(100, 70, 20, .16);
+}
+
+/* 付箋の右端を少し折り返した感じに */
+.result-important::after {
+  content: "";
+  position: absolute;
+
+  right: 0;
+  bottom: -5px;
+
+  width: 8px;
+  height: 6px;
+
+  background: #b98b20;
+
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+/* =========================
+   カードが飛んでいく
+========================= */
+
+.result-book .result-card.fly-left {
+  transform:
+    translateX(-120%)
+    rotate(-8deg)
+    scale(.96);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  z-index: 20;
+}
+
+.result-book .result-card.fly-right {
+  transform:
+    translateX(120%)
+    rotate(8deg)
+    scale(.96);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  z-index: 20;
+}
+
+/* 戻ってくるカード */
+.result-book .result-card.fly-back-left {
+  transform:
+    translateX(-120%)
+    rotate(-8deg)
+    scale(.96);
+
+  opacity: 0;
+
+  z-index: 20;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media (max-width: 679px) {
+
+  .result-book-wrap {
+    padding: 0 48px;
+  }
+
+  .result-book {
+    height: 520px;
+  }
+
+  .result-book .result-card {
+    padding: 26px 22px;
+  }
+
+  .result-book-button {
+    width: 40px;
+    height: 40px;
+    font-size: 21px;
+  }
+
+}
+
+
   </style>
+		
+		
   <script src="/_sdk/b3bf9e8ac58e6ad6.data_sdk.js" type="text/javascript" integrity="sha512-otc1u9NYq9Ms5Jt//7vmhrrqR5CLPr8Jdgs6741gqniClfLMcfmC+jK/cKuQdhLv6G0esJ/FzaMS9tv0T/vj/Q=="></script>
   <script src="/_sdk/a27879be4562f807.resizing_sdk.js" type="text/javascript" integrity="sha512-trcxRwz+QLrzK0Dqg95xqVRryR7WtWui2YopXyzOIr3WMde3j/xCRgT63/b/EAg7klDsAOuHzoRgoryhwm8QFw=="></script>
  </head>
@@ -792,8 +1134,8 @@
         <!-- 説明 -->
         <section class="intro-panel">
           <p class="intro-lead">
-            交際中のふたりも、<br>そうでないふたりも。<br>
-            一緒に本音を見てみよう。
+            友達と、恋人と一緒に！<br>もちろん1人でもOK！<br>
+            あなたの交際スタイルがわかります。
           </p>
 
      <div class="intro-steps">
@@ -810,7 +1152,7 @@
     <div class="step-icon">
       <img src="image/2.png" alt="">
     </div>
-    <strong>それぞれ本音で<br>価値観をチェック</strong>
+    <strong>それぞれ本音で<br>価値観チェック</strong>
   </div>
 
   <span class="step-arrow">→</span>
@@ -896,8 +1238,8 @@
      <header><img src="image/result.png" alt="びあんラボ" class="result-logo"></header>
 
      <section class="summary-card soft-shadow" aria-label="回答サマリー">
-      <p data-template-id="summary-brand" class="canva-text summary-brand">本音メーカーで画像を生成して</p>
-      <h2 data-template-id="summary-title" class="canva-text summary-title">自分の価値観をシェアしよう</h2>
+      <p data-template-id="summary-brand" class="canva-text summary-brand">あなたの回答結果をまとめたカードを作ります</p>
+      <h2 data-template-id="summary-title" class="canva-text summary-title">本音メーカーで画像を生成しよう</h2>
     
 		 
 		 
@@ -931,12 +1273,10 @@
 
      <aside class="talk-card">
       <h2 data-template-id="talk-title" class="canva-text text-xl font-bold">違いを、対話のきっかけに</h2>
-      <p class="page-copy" style="margin:12px 0 0;">これは診断結果ではなく、あなたが選んだ結果です。</p>
-      <ul>
+      <ul>  
+	   <li data-template-id="talk-point-1" class="canva-text">これは診断結果ではなく、あなたが選んだ結果です。</li>
        <li data-template-id="talk-point-1" class="canva-text">違うこと自体は、問題ではありません。</li>
-       <li data-template-id="talk-point-2" class="canva-text">「なぜそう思うの？」を、やさしく聞いてみましょう。</li>
-       <li data-template-id="talk-point-3" class="canva-text">★をつけた、自分的に重要な項目から重点的に話してみるのもおすすめです。</li>
-       <li data-template-id="talk-point-4" class="canva-text">相手を説得するより、まずは理解することを大切に。</li>
+       <li data-template-id="talk-point-3" class="canva-text">気の合う友人や恋人と通話しながらやってみるのもおすすめです♪</li>
       </ul>
      </aside>
 
@@ -979,54 +1319,55 @@
     const questionData = {
   student: [
     { name: "離れている時のコミュニケーション", key: "distance", questions: [
-      ["LINE", "こまめにしたい", "必要な時だけでいい", "連絡の頻度について話してみよう"],
-      ["電話", "電話が好き", "電話は苦手", "電話で心地よい距離感は？"],
-      ["LINEで毎日挨拶はする？", "毎日したい", "毎日はしなくていい", "挨拶に求める安心感は？"],
-      ["離れている時の連絡について", "いつでも連絡したい", "お互いのペースでいい", "忙しい時の連絡ルールは？"]
+      ["LINEの返信速度", "早い方が嬉しい", "いつでもいい", "連絡の頻度について話してみよう。自分はどのくらいで返す？相手にはどれくらいを求める？"],
+      ["通話すること", "好き・暇電したい", "電話は苦手・必要最低限", "電話で心地よい距離感は？"],
+      ["XやTikTokでセクマイ垢を持っていたら", "そのまま使って良い", "消して欲しい", "趣味垢や友達探しなど、アカウントを持つことについて話してみよう"],
+      ["離れている時の連絡について", "何をしてるか知りたい", "用事がある時のみが良い", "部活や習い事のスケジュール、休日の予定などどこまで共有したいか話し合ってみよう"]
     ]},
     { name: "第三者を含むコミュニケーション", key: "third-party", questions: [
-      ["カミングアウト", "できるだけ伝えたい", "必要な相手だけでいい", "話す・話さない理由は？"],
-      ["「友達」として紹介されることをどう感じる？", "恋人として紹介してほしい", "友達としてで気にならない", "どんな紹介が心地よい？"],
+      ["カミングアウト", "できるだけ伝えたい", "できるだけ秘密にしたい", "話す・話さない理由は？自分自身のセクシャリティを知っている人はいる？"],
+      ["「友達」として紹介されることをどう感じる？", "しょうがないけど悲しい", "友達としてで気にならない", "カミングアウトをしていなくて、友達として振る舞わなければならない場合について考えてみよう"],
       ["異性との関わり", "気になる・共有してほしい", "気にしない・自由でいてほしい", "安心できる境界線は？"],
-      ["「友達と恋人の境界線はどこ？」", "ここからは恋人", "友達との境界はあいまい", "境界線について話してみよう"]
+      ["同性との関わり", "気になる・共有してほしい", "気にしない・自由でいてほしい", "自分が友達と関わるときにどうありたいかも考えてみよう"]
     ]},
     { name: "一緒にいる時のコミュニケーション", key: "together", questions: [
-      ["「彼女」などの呼ばれ方", "恋人として呼んでほしい", "場面に合わせたい", "心地よい呼ばれ方は？"],
-      ["ボイ／フェムなどの性表現", "言葉で表現したい", "決めつけられたくない", "自分らしさをどう扱いたい？"],
+      ["恋人に「彼女」と認識されることについて", "違和感はない", "女性っぽい響きが気になる", "恋人には性別としてどう思っていて欲しいのか話してみよう。"],
+      ["デートのスタイル", "アウトドア派", "インドア派", "どんなデートが好き？"],
       ["デート中の距離感", "恋人っぽさを出したい", "恋人っぽさは出したくない", "人前で安心できる距離感は？"],
       ["けんかやすれ違いが起きたら？", "すぐ話したい", "時間を置いてから話したい", "話し合いやすいタイミングは？"]
     ]},
     { name: "これからについて", key: "future", questions: [
-      ["テスト期間・部活など一時的に忙しい時の関わり", "忙しくても連絡したい", "落ち着くまでそっとしてほしい", "忙しい時の支え方は？"],
-      ["記念日や誕生日をどう過ごしたい？", "一緒に特別に過ごしたい", "無理せずいつも通りでいい", "記念日に大切にしたいことは？"],
-      ["恋人と一緒にやってみたいことは？", "いろいろ一緒に挑戦したい", "無理なく少しずつでいい", "一緒にやってみたいことは？"],
-      ["これからのふたりについて", "早めに話しておきたい", "今を大切にしたい", "どんな未来を話してみたい？"]
+      ["テスト期間・部活など一時的に忙しい時の関わり", "忙しくても連絡したい", "落ち着くまでそっとしてほしい", "忙しい時の関わり方はどうしたい？"],
+      ["誕生日の過ごし方", "一緒に特別に過ごしたい", "友達や家族も入れてお祝いしたい", "恋人がいる状態で迎える誕生日について話してみよう"],
+      ["恋人と一緒にやってみたいことは？", "いろいろ一緒に挑戦したい", "あまり思いつかない", "一緒にやってみたいことは？"],
+      ["これからのふたりについて", "早めに話しておきたい", "今を大切にしたい", "どんな未来にしたい？"]
     ]}
   ],
   working: [
     { name: "離れている時のコミュニケーション", key: "distance", questions: [
-      ["LINE", "こまめにしたい", "必要な時だけでいい", "連絡の頻度について話してみよう"],
-      ["電話", "電話が好き", "電話は苦手", "電話で心地よい距離感は？"],
-      ["LINEで毎日挨拶はする？", "毎日したい", "毎日はしなくていい", "挨拶に求める安心感は？"],
-      ["飲み会中の連絡について", "途中でも連絡がほしい", "終わってからでいい", "飲み会中の連絡ルールは？"]
+     ["LINEの返信速度", "早い方が嬉しい", "いつでもいい", "連絡の頻度について話してみよう。自分はどのくらいで返す？相手にはどれくらいを求める？"],
+      ["通話すること", "好き・暇電したい", "電話は苦手・必要最低限", "電話で心地よい距離感は？"],
+      ["XやTikTokでセクマイ垢を持っていたら", "そのまま使って良い", "消して欲しい", "趣味垢や友達探しなど、アカウントを持つことについて話してみよう"],
+      ["離れている時の連絡について", "何をしてるか知りたい", "用事がある時のみが良い", "部活や習い事のスケジュール、休日の予定などどこまで共有したいか話し合ってみよう"]
     ]},
     { name: "第三者を含むコミュニケーション", key: "third-party", questions: [
-      ["カミングアウト", "できるだけ伝えたい", "必要な相手だけでいい", "話す・話さない理由は？"],
-      ["「友達」として紹介されることをどう感じる？", "恋人として紹介してほしい", "友達としてで気にならない", "どんな紹介が心地よい？"],
-      ["年末は家族で過ごすなど家族内のしきたりはある？", "家族の予定を優先したい", "ふたりの予定も大切にしたい", "家族との過ごし方をどう共有する？"],
-      ["「友達と恋人の境界線はどこ？」", "ここからは恋人", "友達との境界はあいまい", "境界線について話してみよう"]
+      ["カミングアウト", "できるだけ伝えたい", "できるだけ秘密にしたい", "話す・話さない理由は？自分自身のセクシャリティを知っている人はいる？"],
+      ["「友達」として紹介されることをどう感じる？", "しょうがないけど悲しい", "友達としてで気にならない", "カミングアウトをしていなくて、友達として振る舞わなければならない場合について考えてみよう"],
+      ["異性との関わり", "気になる・共有してほしい", "気にしない・自由でいてほしい", "安心できる境界線は？"],
+      ["同性との関わり", "気になる・共有してほしい", "気にしない・自由でいてほしい", "自分が友達と関わるときにどうありたいかも考えてみよう"]
     ]},
     { name: "一緒にいる時のコミュニケーション", key: "together", questions: [
-      ["「彼女」などの呼ばれ方", "恋人として呼んでほしい", "場面に合わせたい", "心地よい呼ばれ方は？"],
+     ["恋人に「彼女」と認識されることについて", "違和感はない", "女性っぽい響きが気になる", "恋人には性別としてどう思っていて欲しいのか話してみよう。"],
+      ["デートのスタイル", "アウトドア派", "インドア派", "どんなデートが好き？"],
       ["デート中の距離感", "恋人っぽさを出したい", "恋人っぽさは出したくない", "人前で安心できる距離感は？"],
-      ["けんかやすれ違いが起きたら？", "その日のうちに話したい", "一度冷ましてから話したい", "話し合いやすいタイミングは？"],
-      ["一緒にいる時の過ごし方", "できるだけ一緒に楽しみたい", "それぞれの時間もほしい", "一緒にいる時に大切にしたいことは？"]
+      ["けんかやすれ違いが起きたら？", "すぐ話したい", "時間を置いてから話したい", "話し合いやすいタイミングは？"]
     ]},
     { name: "これからについて", key: "future", questions: [
-      ["子供が欲しい願望", "子どもを望んでいる", "今は考えていない", "子どもについて話してみよう", "hasChildren"],
-      ["将来or現在ペットを飼いたい願望はある？", "飼いたい", "今は考えていない", "ペットとの暮らしで大切なことは？"],
+      ["子供が欲しい願望", "子どもを望んでいる", "今は考えていない", "子どもについて話してみよう。欲しい場合に考えている選択肢はある？", "hasChildren"],
+      ["将来or現在ペットを飼いたい願望はある？", "飼いたい", "今は考えていない", "犬派or猫派？動物が苦手?
+	   ペットとの暮らしでこだわりはある？"],
       ["同棲について", "早めがいい", "慎重に考えたい", "具体的に何ヶ月・何年など目安を話してみよう"],
-      ["将来パートナーシップ制度（or同性婚）について", "利用・制度化を考えたい", "今は特に考えていない", "制度についての希望や考えは？"]
+      ["将来パートナーシップ制度（or同性婚）について", "利用・制度化を考えたい", "今は特に考えていない", "制度や今後についてどんな価値観を持っているか話してみよう。「未定」「わからない」でも本音ならOK！)"]
     ]}
   ]
 };
@@ -1038,9 +1379,9 @@ const categories = {
 
 const sectionStyles = {
   distance: { name: "離れている時のコミュニケーション", color: "#7A8FD0", soft: "#EEF1FC" },
-  "third-party": { name: "第三者を含むコミュニケーション", color: "#C58AB8", soft: "#FAEFF8" },
+  "third-party": { name: "第三者を含むコミュニケーション", color: "#FF7795", soft: "#FAEFF8" },
   together: { name: "一緒にいる時のコミュニケーション", color: "#65A58E", soft: "#EDF7F2" },
-  future: { name: "これからについて", color: "#D29A57", soft: "#FFF4E7" }
+  future: { name: "これからについて", color: "#FFBA2F", soft: "#FFF4E7" }
 };
 
 const state = { category: null, answers: {}, important: {} };
@@ -1269,9 +1610,9 @@ const RESULT_IMAGE = {
     softPurple: "#F0EDFF",
     sections: {
       distance: "#7A8FD0",
-      "third-party": "#C58AB8",
+      "third-party": "#FF7795",
       together: "#65A58E",
-      future: "#D29A57"
+      future: "#FFBA2F"
     }
   }
 };
@@ -2221,13 +2562,13 @@ async function saveResultImage(
 
       await navigator.share({
         title: "びあんラボの本音メーカー",
-        text: "びあんラボの本音メーカーの結果",
+        text: "#びあんラボの本音メーカー ",
         files: [file]
       });
 
       if (feedback) {
         feedback.textContent =
-          "結果画像を生成しました";
+          "画像生成に成功しました！";
       }
 
       return;
@@ -2266,7 +2607,7 @@ async function saveResultImage(
   } catch (error) {
 
     console.error(
-      "結果画像生成エラー",
+      "結果画像生成エラー🧩スクショ保存してね",
       error
     );
 
@@ -2285,12 +2626,55 @@ async function saveResultImage(
     }
   }
 }
-
 function renderResults() {
   const category = state.category;
   const questions = questionsFor(category);
 
-  $("result-list").innerHTML = "";
+  const resultList = $("result-list");
+
+  resultList.innerHTML = "";
+
+  /* =========================
+     外側
+  ========================= */
+
+  const wrap = document.createElement("div");
+  wrap.className = "result-book-wrap";
+
+  /* =========================
+     カード置き場
+  ========================= */
+
+  const book = document.createElement("div");
+  book.className = "result-book";
+
+  /* =========================
+     左ボタン
+  ========================= */
+
+  const prevButton = document.createElement("button");
+
+  prevButton.type = "button";
+  prevButton.className = "result-book-button prev";
+  prevButton.setAttribute("aria-label", "前の回答");
+
+  prevButton.innerHTML = "‹";
+
+  /* =========================
+     右ボタン
+  ========================= */
+
+  const nextButton = document.createElement("button");
+
+  nextButton.type = "button";
+  nextButton.className = "result-book-button next";
+  nextButton.setAttribute("aria-label", "次の回答");
+
+  nextButton.innerHTML = "›";
+
+  /* =========================
+     カード作成
+  ========================= */
 
   questions.forEach((question, index) => {
 
@@ -2302,39 +2686,41 @@ function renderResults() {
     const answerValue =
       Number(state.answers[question.id]) || 4;
 
-
-    item.className =
-      "result-card soft-shadow" +
-      (important ? " important-result" : "");
-    item.dataset.section = question.section;
-    item.style.setProperty("--section-color", sectionStyles[question.section].color);
-    item.dataset.section = question.section;
-    item.style.setProperty("--section-color", sectionStyles[question.section].color);
-
-
-    /*
-     * 1〜7をパーセント位置に変換
-     * 1 = 0%
-     * 4 = 50%
-     * 7 = 100%
-     */
     const position =
       ((answerValue - 1) / 6) * 100;
 
+    item.className =
+      "result-card soft-shadow";
+
+    item.dataset.index = index;
+
+    item.dataset.section =
+      question.section;
+
+    item.style.setProperty(
+      "--section-color",
+      sectionStyles[question.section].color
+    );
+
+    if (important) {
+      item.classList.add("important-result");
+    }
 
     item.innerHTML = `
 
       <p class="question-number">
-        ${important
-          ? (question.special === "hasChildren"
-            ? "✓ 子供がいる · 質問 " + (index + 1)
-            : "★ 自分的に重要 · 質問 " + (index + 1))
-          : "質問 " + (index + 1)
+        ${
+          important
+            ? (
+                question.special === "hasChildren"
+                  ? "✓ 子供がいる · 質問 " + (index + 1)
+                  : "★ 自分的に重要 · 質問 " + (index + 1)
+              )
+            : "質問 " + (index + 1)
         }
       </p>
 
       <h3 class="result-question"></h3>
-
 
       <div class="result-scale">
 
@@ -2342,7 +2728,6 @@ function renderResults() {
           <span class="left"></span>
           <span class="right"></span>
         </div>
-
 
         <div class="result-scale-track">
 
@@ -2358,47 +2743,44 @@ function renderResults() {
             <span class="result-scale-tick"></span>
           </div>
 
-
           <div
             class="result-scale-marker"
             data-value="${answerValue}"
-            style="left: ${position}%"
+            style="left:${position}%"
           ></div>
 
         </div>
-
 
         <p class="result-answer"></p>
 
       </div>
 
-
       ${
         important
-          ? `<span class="result-important">${question.special === "hasChildren" ? "✓ 子供がいる" : "★ 自分的に重要！"}</span>`
+          ? `
+            <span class="result-important">
+              ${
+                question.special === "hasChildren"
+                  ? "✓ 子供がいる"
+                  : "★ 自分的に重要！"
+              }
+            </span>
+          `
           : ""
       }
-
 
       <p class="discussion">
         <strong>話してみるヒント：</strong>
       </p>
-
     `;
 
-
-    /*
-     * 質問文
-     */
+    /* 質問 */
     item.querySelector(
       ".result-question"
     ).textContent =
       question.question;
 
-
-    /*
-     * 左右の価値観
-     */
+    /* 左右ラベル */
     item.querySelector(
       ".result-scale-labels .left"
     ).textContent =
@@ -2409,19 +2791,13 @@ function renderResults() {
     ).textContent =
       question.rightLabel;
 
-
-    /*
-     * 選択内容
-     */
+    /* 回答 */
     item.querySelector(
       ".result-answer"
     ).textContent =
       responseText(question);
 
-
-    /*
-     * 話してみるヒント
-     */
+    /* ヒント */
     item.querySelector(
       ".discussion"
     ).append(
@@ -2430,12 +2806,196 @@ function renderResults() {
       )
     );
 
-
-    $("result-list").appendChild(item);
-
+    book.appendChild(item);
   });
 
+  /* =========================
+     最初のカードを表示
+  ========================= */
+
+  let currentIndex = 0;
+
+  const cards =
+    Array.from(
+      book.querySelectorAll(".result-card")
+    );
+
+  function updateCards() {
+
+    cards.forEach((card, index) => {
+
+      card.classList.remove(
+        "stack-front",
+        "stack-1",
+        "stack-2",
+        "fly-left",
+        "fly-right",
+        "fly-back-left",
+        "fly-back-right"
+      );
+
+      if (index === currentIndex) {
+
+        card.classList.add(
+          "stack-front"
+        );
+
+      } else if (
+        index === currentIndex + 1
+      ) {
+
+        card.classList.add(
+          "stack-1"
+        );
+
+      } else if (
+        index === currentIndex + 2
+      ) {
+
+        card.classList.add(
+          "stack-2"
+        );
+
+      } else {
+
+        card.style.display = "none";
+      }
+    });
+
+    /* 使わないカードを戻す */
+    cards.forEach((card, index) => {
+
+      if (index >= currentIndex &&
+          index <= currentIndex + 2) {
+
+        card.style.display = "";
+      }
+    });
+
+    prevButton.disabled =
+      currentIndex === 0;
+
+    nextButton.disabled =
+      currentIndex === cards.length - 1;
+  }
+
+  /* =========================
+     次のカード
+  ========================= */
+
+  nextButton.addEventListener(
+    "click",
+    () => {
+
+      if (
+        currentIndex >=
+        cards.length - 1
+      ) {
+        return;
+      }
+
+      const currentCard =
+        cards[currentIndex];
+
+      currentCard.classList.add(
+        "fly-left"
+      );
+
+      setTimeout(() => {
+
+        currentIndex++;
+
+        updateCards();
+
+      }, 280);
+    }
+  );
+
+  /* =========================
+     前のカード
+  ========================= */
+
+
+prevButton.addEventListener(
+  "click",
+  () => {
+
+    if (currentIndex <= 0) {
+      return;
+    }
+
+    const previousIndex =
+      currentIndex - 1;
+
+    const previousCard =
+      cards[previousIndex];
+
+    /*
+     * 前のカードを左側に待機
+     */
+    previousCard.style.display = "";
+
+    previousCard.classList.remove(
+      "stack-front",
+      "stack-1",
+      "stack-2",
+      "fly-left",
+      "fly-right",
+      "fly-back-left",
+      "fly-back-right"
+    );
+
+    /*
+     * 左側から飛び込んでくる状態
+     */
+    previousCard.classList.add(
+      "fly-back-left"
+    );
+
+    /*
+     * 一度ブラウザに描画させてから
+     * 左 → 中央へ動かす
+     */
+    requestAnimationFrame(() => {
+
+      requestAnimationFrame(() => {
+
+        previousCard.classList.remove(
+          "fly-back-left"
+        );
+
+        previousCard.classList.add(
+          "stack-front"
+        );
+
+        currentIndex =
+          previousIndex;
+
+        updateCards();
+
+      });
+
+    });
+  }
+);
+
+
+  /* =========================
+     組み立て
+  ========================= */
+
+  wrap.appendChild(prevButton);
+
+  wrap.appendChild(book);
+
+  wrap.appendChild(nextButton);
+
+  resultList.appendChild(wrap);
+
+  /* 初期表示 */
+  updateCards();
 }
+
 function shareUrl() {
   return window.location.origin +
     window.location.pathname +
