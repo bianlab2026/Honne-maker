@@ -564,6 +564,11 @@
 /* 結果画面の見出し */
 #answers-heading {
   margin-bottom: 18px;
+  text-align: center;
+}
+	  #answers-heading img {
+  display: block;
+  margin: 0 auto;
 }
 	  
 	  
@@ -793,8 +798,6 @@
   position: relative;
   z-index: 1;
 }
-
-/* ===== 今回の修正 ===== */
 #result-view .shell { padding-bottom: 70px; }
 .result-maker-button { display:block; width:min(100%,420px); margin:18px auto 8px; padding:0; border:0; background:transparent; box-shadow:none; }
 .result-maker-button img { display:block; width:100%; height:auto; object-fit:contain; transition:transform .15s ease, opacity .15s ease; }
@@ -838,9 +841,68 @@
   width: 100%;
   max-width: 620px;
   margin: 24px auto 0;
-
-  padding: 0 54px;
+  padding: 0;
   box-sizing: border-box;
+}
+
+.result-book {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: visible;
+}
+
+/* 左右ボタンをカード下へ */
+.result-book-button {
+  position: absolute;
+  top: auto;
+  bottom: -62px;
+  z-index: 30;
+
+  width: 44px;
+  height: 44px;
+
+  transform: none;
+
+  border: 2px solid #d8d1e4;
+  border-radius: 50%;
+
+  background: #fff;
+  color: #6f6286;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+
+  box-shadow:
+    0 5px 12px rgba(78, 50, 36, .12);
+
+  transition:
+    transform .15s ease,
+    background .15s ease,
+    box-shadow .15s ease;
+}
+
+.result-book-button:hover {
+  background: #f7f3fb;
+  box-shadow:
+    0 7px 16px rgba(78, 50, 36, .16);
+}
+
+.result-book-button:active {
+  transform: scale(.94);
+}
+
+.result-book-button.prev {
+  left: calc(50% - 54px);
+}
+
+.result-book-button.next {
+  right: calc(50% - 54px);
 }
 
 .result-book {
@@ -936,15 +998,15 @@
 .result-book-button {
   position: absolute;
 
-  top: 50%;
+  bottom: 90px;
   z-index: 30;
 
-  width: 44px;
-  height: 44px;
+  width: 50px;
+  height: 50px;
 
-  transform: translateY(-50%);
+  transform: none;
 
-  border: 2px solid #d8d1e4;
+  border: 3px solid #0D4383;
   border-radius: 50%;
 
   background: #fff;
@@ -957,7 +1019,7 @@
 
   cursor: pointer;
 
-  font-size: 24px;
+  font-size: 35px;
   line-height: 1;
 
   box-shadow:
@@ -981,13 +1043,12 @@
     translateY(-50%)
     scale(.94);
 }
-
 .result-book-button.prev {
-  left: 0;
+  left: 30px;
 }
 
 .result-book-button.next {
-  right: 0;
+  right: 30px;
 }
 
 /* ボタン無効 */
@@ -1087,11 +1148,10 @@
 /* =========================
    スマホ
 ========================= */
-
 @media (max-width: 679px) {
 
   .result-book-wrap {
-    padding: 0 48px;
+    padding: 0;
   }
 
   .result-book {
@@ -1103,9 +1163,18 @@
   }
 
   .result-book-button {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     font-size: 21px;
+    bottom: 80px;
+  }
+
+  .result-book-button.prev {
+    left: calc(50% - 50px);
+  }
+
+  .result-book-button.next {
+    right: calc(50% - 50px);
   }
 
 }
@@ -1196,6 +1265,16 @@
 
 #category-list.show {
   display: grid;
+}
+	  
+	  @media (max-width: 679px) {
+
+  .intro-lead {
+    font-size: .92rem;
+    line-height: 1.7;
+    white-space: nowrap;
+  }
+
 }
 
   </style>
@@ -1391,10 +1470,19 @@
       <p id="share-feedback-top" class="share-feedback" aria-live="polite"></p>
      </section>
 
-     <section class="answers-section" aria-labelledby="answers-heading">
-      <h2 id="answers-heading">あなたの回答一覧</h2>
-      <div id="result-list"></div>
-     </section>
+<section class="answers-section" aria-labelledby="answers-heading">
+
+  <h2 id="answers-heading">
+    <img
+      src="./image/matome.png"
+      alt="回答一覧"
+    >
+  </h2>
+
+  <div id="result-list"></div>
+
+</section>
+
 
      <aside class="talk-card">
       <h2 data-template-id="talk-title" class="canva-text text-xl font-bold">違いを、対話のきっかけに</h2>
@@ -2331,9 +2419,9 @@ const nickname = state.nickname || "";
 if (nickname) {
   drawText(
     ctx,
-    nickname + "さんの本音",
+    nickname + "さんの回答結果",
     canvas.width / 2,
-    175,
+    150,
     {
       font: '700 34px "Zen Maru Gothic"',
       color: colors.ink,
@@ -2532,8 +2620,7 @@ if (nickname) {
    * 下部メッセージ
    */
   const finalFooterY=currentY+35;
-  drawText(ctx,"違いを、対話のきっかけに。",canvas.width/2,finalFooterY-35,{font:'700 25px "Zen Maru Gothic"',color:colors.purpleDark,align:"center"});
-  drawText(ctx,"これは診断結果ではなく、あなたが選んだ結果です。",canvas.width/2,finalFooterY+8,{font:'500 17px "Zen Maru Gothic"',color:colors.muted,align:"center"});
+  drawText(ctx,"違いを、対話のきっかけに。",canvas.width/2,finalFooterY-20,{font:'700 25px "Zen Maru Gothic"',color:colors.purpleDark,align:"center"});
 
   /* 下部：TOPと同じ紫＋白い丸フリル */
   const bottomTop=canvas.height-115;
@@ -2694,35 +2781,59 @@ async function saveResultImage(
       preview.hidden = false;
     }
 
-    /*
-     * ==========================================
-     * スマホ：共有シート
-     * ==========================================
-     */
+   /*
+ * ==========================================
+ * スマホ
+ * ==========================================
+ */
+if (window.matchMedia("(max-width: 679px)").matches) {
 
-    if (
-      navigator.share &&
-      navigator.canShare &&
-      navigator.canShare({
-        files: [file]
-      })
-    ) {
-      console.log("④ 共有シートを開きます");
+ 
+  if (
+    /iPhone|iPad|iPod/i.test(navigator.userAgent)
+  ) {
+    if (feedback) {
+      feedback.textContent =
+        "画像をタップして長押しすると、写真に保存できます";
+    }
 
+    return;
+  }
+
+  /*
+   * Androidなど
+   * ファイル共有が使える場合は共有シート
+   */
+  if (
+    navigator.share &&
+    navigator.canShare &&
+    navigator.canShare({
+      files: [file]
+    })
+  ) {
+    try {
       await navigator.share({
         title: "びあんラボの本音メーカー",
-        text: "#びあんラボの本音メーカー ",
+        text: "#びあんラボの本音メーカー",
         files: [file]
       });
 
       if (feedback) {
         feedback.textContent =
-          "画像生成に成功しました！";
+          "画像を共有しました";
       }
 
       return;
-    }
 
+    } catch (error) {
+
+      if (error?.name === "AbortError") {
+        return;
+      }
+
+    }
+  }
+}
     /*
      * ==========================================
      * PC：ダウンロード
@@ -2775,6 +2886,15 @@ async function saveResultImage(
     }
   }
 }
+		 
+		 const nicknameElement = $("result-nickname");
+
+if (nicknameElement) {
+  nicknameElement.textContent = state.nickname
+    ? state.nickname + "さん"
+    : "あなた";
+}
+		 
 function renderResults() {
   const category = state.category;
   const questions = questionsFor(category);
@@ -3201,20 +3321,24 @@ function shareUrl() {
         });
       }
 
-      if (lineButton) {
-        lineButton.addEventListener("click", async () => {
-          if (navigator.share) {
-            await shareGeneric(feedbackId);
-            return;
-          }
-          window.open(
-            "https://social-plugins.line.me/lineit/share?url=" +
-            encodeURIComponent(shareUrl()),
-            "_blank", "noopener,noreferrer"
-          );
-          setShareFeedback(feedbackId, "LINEの共有画面を開きました");
-        });
-      }
+if (lineButton) {
+  lineButton.addEventListener("click", () => {
+
+    const lineUrl =
+      "https://line.me/R/msg/text/?" +
+      encodeURIComponent(
+        "#びあんラボの本音メーカー\n" +
+        shareUrl()
+      );
+
+    window.location.href = lineUrl;
+
+    setShareFeedback(
+      feedbackId,
+      "LINEを開いています"
+    );
+  });
+}
 
       if (linkButton) {
         linkButton.addEventListener("click", () => shareGeneric(feedbackId));
