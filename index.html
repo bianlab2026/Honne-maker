@@ -1110,6 +1110,93 @@
 
 }
 
+	  /* =========================
+   ニックネーム入力
+========================= */
+
+.nickname-step {
+  width: min(88%, 680px);
+  margin: 0 auto 36px;
+  padding: 30px 22px 26px;
+  background: rgba(255,255,255,.94);
+  border: 3px solid #1b4c91;
+  box-shadow: 0 8px 18px rgba(45,31,76,.12);
+  text-align: center;
+}
+
+.nickname-eyebrow {
+  margin: 0 0 8px;
+  color: #8d79c9;
+  font-family: "DM Sans", sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.nickname-title {
+  margin: 0;
+  color: #1b4c91;
+  font-size: 1.45rem;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.nickname-copy {
+  margin: 8px 0 20px;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.nickname-form {
+  display: grid;
+  gap: 10px;
+}
+
+.nickname-form input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 16px;
+  border: 2px solid #d8d1e4;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  text-align: center;
+  outline: none;
+}
+
+.nickname-form input:focus {
+  border-color: #8d79c9;
+  box-shadow: 0 0 0 3px rgba(141,121,201,.15);
+}
+
+.nickname-next-button {
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 14px;
+  background: #1b4c91;
+  color: #fff;
+  font-weight: 700;
+}
+
+.nickname-next-button:hover {
+  opacity: .9;
+}
+
+.nickname-error {
+  min-height: 20px;
+  margin: 8px 0 0;
+  color: #d45b83;
+  font-size: .78rem;
+  font-weight: 700;
+}
+	  #category-list {
+  display: none;
+}
+
+#category-list.show {
+  display: grid;
+}
 
   </style>
 		
@@ -1170,6 +1257,44 @@
       </button>
        <p id="share-top-feedback" class="share-feedback" aria-live="polite"></p>
     </section>
+		  
+		  <!-- ニックネーム入力 -->
+<section id="nickname-step" class="nickname-step">
+  <p class="nickname-eyebrow">YOUR NAME</p>
+
+  <h2 class="nickname-title">
+    ニックネームを<br>教えてね
+  </h2>
+
+  <p class="nickname-copy">
+    結果画像に表示されます
+  </p>
+
+  <div class="nickname-form">
+    <input
+      id="nickname-input"
+      type="text"
+      maxlength="20"
+      placeholder="ニックネーム"
+      autocomplete="nickname"
+    >
+
+    <button
+      id="nickname-next"
+      type="button"
+      class="nickname-next-button"
+    >
+      次へ
+    </button>
+  </div>
+
+  <p
+    id="nickname-error"
+    class="nickname-error"
+    aria-live="polite"
+  ></p>
+</section>
+		  
 
     <!-- カテゴリー -->
     <div id="category-list" class="top-category-list">
@@ -1383,7 +1508,13 @@ const sectionStyles = {
   future: { name: "これからについて", color: "#FFBA2F", soft: "#FFF4E7" }
 };
 
-const state = { category: null, answers: {}, important: {} };
+const state = {
+  nickname: "",
+  category: null,
+  answers: {},
+  important: {}
+};
+	  
     const $ = (id) => document.getElementById(id);
     const storageKey = (category) => "bian-lab-values-" + category;
 
@@ -2193,10 +2324,29 @@ canvas.height = footerY + footerHeight;
   const categoryName=categories[state.category] ? categories[state.category].name : "";
   drawText(ctx,categoryName,canvas.width-outerMargin-10,118,{font:'700 30px "Zen Maru Gothic"',color:colors.purpleDark,align:"right"});
 
+	
+	/* ニックネーム */
+const nickname = state.nickname || "";
+
+if (nickname) {
+  drawText(
+    ctx,
+    nickname + "さんの本音",
+    canvas.width / 2,
+    175,
+    {
+      font: '700 34px "Zen Maru Gothic"',
+      color: colors.ink,
+      align: "center"
+    }
+  );
+}
+	
+	
   /*
    * 質問セクション
    */
-  currentY = 245;
+  currentY = 285;
 
   sections.forEach(
     (section, sectionIndex) => {
@@ -3087,6 +3237,40 @@ function shareUrl() {
         showView("questions-view");
       }
     }
+
+/* =========================
+   ニックネーム入力
+========================= */
+
+$("nickname-next").addEventListener("click", () => {
+  const input = $("nickname-input");
+  const nickname = input.value.trim();
+
+  if (!nickname) {
+    $("nickname-error").textContent =
+      "ニックネームを入力してください";
+    input.focus();
+    return;
+  }
+
+  state.nickname = nickname;
+
+  localStorage.setItem(
+    "bian-lab-nickname",
+    nickname
+  );
+
+  $("nickname-error").textContent = "";
+
+  $("nickname-step").style.display = "none";
+  $("category-list").classList.add("show");
+});
+
+$("nickname-input").addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    $("nickname-next").click();
+  }
+});
 
     document.querySelectorAll("[data-category]").forEach(button => {
       button.addEventListener("click", () => route("/" + button.dataset.category));
