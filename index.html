@@ -102,10 +102,18 @@
   text-align: center;
   padding: 40px 20px;
 
-  background-image: url("./image/back.png");
+  /* スマホ用 */
+  background-image: url("image/back.png");
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
+}
+
+/* PC用 */
+@media (min-width: 680px) {
+  .top-first {
+    background-image: url("image/backpc.png");
+  }
 }
 
 	  /* =========================
@@ -880,7 +888,7 @@
 .result-book-button {
   position: absolute;
 
-  top: 50%;
+  top: 80%;
   z-index: 30;
 
   width: 50px;
@@ -1144,7 +1152,7 @@
 	  @media (max-width: 679px) {
 
   .intro-lead {
-    font-size: .92rem;
+    font-size: .70rem;
     line-height: 1.7;
     white-space: nowrap;
   }
@@ -1176,8 +1184,8 @@
       >
 
       <p class="intro-lead">
-        あなたの本音の恋愛スタイルを<br>
-        引き出す画像生成ツールです。<br>
+        あなたの本音の恋愛スタイルを引き出す<br>
+        画像生成ツールです。<br>
         すべて本音で答えてください。
       </p>
 
