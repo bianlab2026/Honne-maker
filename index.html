@@ -297,7 +297,17 @@
     }
     .importance.on { border-color: #e9b44b; background: #fff8e7; color: #926408; }
 
-    .sticky-action { position: fixed; z-index: 10; bottom: 0; left: 0; width: 100%; padding: 13px 20px calc(13px + env(safe-area-inset-bottom)); background: rgba(255,250,245,.92); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+ .sticky-action {
+  position: fixed;
+  z-index: 10;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  padding: 13px 20px;
+  background: rgba(255,250,245,.92);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+}
     .sticky-action-inner { width: 100%; max-width: 680px; margin: 0 auto; }
     .primary-button { width: 100%; border: 0; border-radius: 17px; padding: 17px; color: #fff; background: var(--coral); font-weight: 700; font-size: 1rem; box-shadow: 0 7px 16px rgba(203,86,71,.22); }
     .primary-button:hover { background: var(--coral-dark); }
@@ -1091,7 +1101,7 @@
 }
 
 .nickname-title {
-  margin: 0;
+  margin-bottom: 20px;
   color: #1b4c91;
   font-size: 1.45rem;
   line-height: 1.6;
@@ -1208,8 +1218,7 @@
       <p class="nickname-eyebrow">YOUR NAME</p>
 
       <h2 class="nickname-title">
-        ニックネームを<br>
-        教えてね
+        ニックネームを教えてね
       </h2>
 
       <p class="nickname-copy">
@@ -2248,25 +2257,151 @@ const ctx = canvas.getContext("2d");
    */
 canvas.height = footerY + footerHeight;
 
-  /*
-   * 背景：TOPと同じ方眼紙
+    /*
+   * 背景画像
+   * 学生版 → studentback.png
+   * 社会人版 → workingback.png
+   *
+   * 上下の紫フリル部分はそのままにして、
+   * 中央部分だけ背景画像を表示
    */
-  ctx.fillStyle = colors.background;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  const gridSize = 72;
-  ctx.strokeStyle = "rgba(160,160,160,.28)";
-  ctx.lineWidth = 2;
-  for (let x=0; x<=canvas.width; x+=gridSize) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
-  for (let y=0; y<=canvas.height; y+=gridSize) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
 
-  /* 上部：TOPと同じ紫＋白い丸フリル */
-  const headerHeight = 225;
-  ctx.fillStyle = "#d9cde8";
-  ctx.fillRect(0,0,canvas.width,headerHeight);
   ctx.fillStyle = colors.background;
-  for (let x=0; x<canvas.width; x+=96) { ctx.beginPath(); ctx.arc(x+48,headerHeight,48,Math.PI,0,false); ctx.fill(); }
-  ctx.fillStyle = colors.purple;
-  ctx.fillRect(0,0,canvas.width,10);
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  let backgroundFile = "";
+
+  if (state.category === "student") {
+    backgroundFile = "./image/studentback.png";
+  } else if (state.category === "working") {
+    backgroundFile = "./image/workingback.png";
+  }
+
+  if (backgroundFile) {
+
+    const backgroundImage = new Image();
+    backgroundImage.src = backgroundFile;
+
+    try {
+      await backgroundImage.decode();
+
+      /*
+       * 上下の紫フリル部分を避ける
+       */
+      const backgroundTop = 225;
+      const backgroundBottom = 115;
+
+      const backgroundHeight =
+        canvas.height -
+        backgroundTop -
+        backgroundBottom;
+
+      /*
+       * 背景画像の縦横比
+       */
+      const imageRatio =
+        backgroundImage.naturalWidth /
+        backgroundImage.naturalHeight;
+
+      const areaRatio =
+        canvas.width /
+        backgroundHeight;
+
+      let drawWidth;
+      let drawHeight;
+      let drawX;
+      let drawY;
+
+      /*
+       * cover表示
+       */
+      if (imageRatio > areaRatio) {
+
+        drawHeight = backgroundHeight;
+
+        drawWidth =
+          drawHeight * imageRatio;
+
+        drawX =
+          (canvas.width - drawWidth) / 2;
+
+        drawY =
+          backgroundTop;
+
+      } else {
+
+        drawWidth = canvas.width;
+
+        drawHeight =
+          drawWidth / imageRatio;
+
+        drawX = 0;
+
+        drawY =
+          backgroundTop +
+          (backgroundHeight - drawHeight) / 2;
+      }
+
+      /*
+       * 中央部分だけに画像を表示
+       */
+      ctx.save();
+
+      ctx.beginPath();
+
+      ctx.rect(
+        0,
+        backgroundTop,
+        canvas.width,
+        backgroundHeight
+      );
+
+      ctx.clip();
+
+      ctx.drawImage(
+        backgroundImage,
+        drawX,
+        drawY,
+        drawWidth,
+        drawHeight
+      );
+
+      ctx.restore();
+
+    } catch (error) {
+
+      console.warn(
+        "背景画像の読み込みに失敗しました:",
+        backgroundFile,
+        error
+      );
+    }
+  }
+
+/* 上部：紫背景 */
+const headerHeight = 225;
+
+ctx.fillStyle = "#d9cde8";
+ctx.fillRect(
+  0,
+  0,
+  canvas.width,
+  headerHeight
+);
+
+/* 上端の濃い紫ライン */
+ctx.fillStyle = colors.purple;
+ctx.fillRect(
+  0,
+  0,
+  canvas.width,
+  10
+);
 
   /*
    * タイトル：左にロゴ、右に対象カテゴリ
@@ -2484,18 +2619,18 @@ if (nickname) {
     }
   );
 
-  /*
-   * 下部メッセージ
-   */
-  const finalFooterY=currentY+35;
-  drawText(ctx,"違いを、対話のきっかけに。",canvas.width/2,finalFooterY-20,{font:'700 25px "Zen Maru Gothic"',color:colors.purpleDark,align:"center"});
 
-  /* 下部：TOPと同じ紫＋白い丸フリル */
-  const bottomTop=canvas.height-115;
-  ctx.fillStyle="#d9cde8";
-  ctx.fillRect(0,bottomTop,canvas.width,canvas.height-bottomTop);
-  ctx.fillStyle=colors.background;
-  for (let x=0; x<canvas.width; x+=96) { ctx.beginPath(); ctx.arc(x+48,bottomTop,48,0,Math.PI,false); ctx.fill(); }
+/* 下部：紫背景 */
+const bottomTop = canvas.height - 115;
+
+ctx.fillStyle = "#d9cde8";
+
+ctx.fillRect(
+  0,
+  bottomTop,
+  canvas.width,
+  canvas.height - bottomTop
+);
 
   return canvas;
 }
@@ -3132,12 +3267,8 @@ prevButton.addEventListener(
   /* 初期表示 */
   updateCards();
 }
-
 function shareUrl() {
-  return window.location.origin +
-    window.location.pathname +
-    "#" +
-    currentPath();
+  return "https://bian-lab.jp/";
 }
 
     function setShareFeedback(id, message) {
@@ -3215,10 +3346,15 @@ if (lineButton) {
 
     function handleRoute() {
       const path = currentPath();
-      if (path === "/" || !path) {
-        showView("top-view");
-        return;
-      }
+   if (path === "/" || !path) {
+  showView("top-view");
+
+  $("top-first").style.display = "flex";
+  $("nickname-step").classList.remove("active");
+  $("category-step").classList.remove("active");
+
+  return;
+}
       const match = path.match(/^\/(student|working)(\/result)?$/);
       if (!match) { route("/"); return; }
       startCategory(match[1]);
