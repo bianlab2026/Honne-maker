@@ -1048,6 +1048,11 @@
 ========================= */
 
 @media (max-width: 679px) {
+	
+	.top-category-list {
+  width: 96%;
+  gap: 14px;
+}
 
   .result-book-wrap {
     padding: 0;
@@ -1158,13 +1163,20 @@
   font-weight: 700;
 }
 
-	  
-	  @media (max-width: 679px) {
+@media (max-width: 679px) {
 
   .intro-lead {
-    font-size: .70rem;
+    font-size: .58rem;
     line-height: 1.7;
     white-space: nowrap;
+  }
+
+  .top-category-button[data-category="student"] img {
+    content: url("./image/studentsp.png");
+  }
+
+  .top-category-button[data-category="working"] img {
+    content: url("./image/workingsp.png");
   }
 
 }
@@ -1194,9 +1206,9 @@
       >
 
       <p class="intro-lead">
-        あなたの本音の恋愛スタイルを引き出す<br>
-        画像生成ツールです。<br>
-        すべて本音で答えてください。
+        あなたの本音の恋愛スタイルを<br>
+       引き出すセクマイ専用の<br> 画像生成ツールです。
+     
       </p>
 
       <button
@@ -3324,7 +3336,7 @@ if (lineButton) {
   lineButton.addEventListener("click", () => {
 
     const lineUrl =
-      "https://line.me/R/msg/text/?" +
+      "https://line.me/R/share?text=" +
       encodeURIComponent(
         "#びあんラボの本音メーカー\n" +
         shareUrl()
