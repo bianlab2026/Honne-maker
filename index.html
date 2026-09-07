@@ -2154,22 +2154,20 @@ function drawResultQuestion(
   ctx.stroke();
 	  
 	  
-	  const answerText =
-  answerValue === 1 ? "かなりそう思う" :
-  answerValue === 2 ? "そう思う" :
-  answerValue === 3 ? "ややそう思う" :
-  answerValue === 4 ? "どちらともいえない" :
-  answerValue === 5 ? "ややそう思わない" :
-  answerValue === 6 ? "そう思わない" :
+/*回答内容 */
+
+const answerText =
+  value === 1 ? "まったくそう思う" :
+  value === 2 ? "そう思う" :
+  value === 3 ? "ややそう思う" :
+  value === 4 ? "どちらともいえない" :
+  value === 5 ? "ややそう思わない" :
+  value === 6 ? "そう思わない" :
   "まったくそう思わない";
 
-  /*
-   * 回答内容
-   */
-
-  drawText(
-    ctx,
-    answerText,
+drawText(
+  ctx,
+  answerText,
     x + width / 2,
     lineY + 35,
     {
