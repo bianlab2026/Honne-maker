@@ -47,6 +47,9 @@
     :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
     .page { width: 100%; min-height: calc(100 * min(var(--vh, 1vh), 1vh)); }
     .shell { width: 100%; max-width: 720px; margin: 0 auto; padding: 24px 20px 112px; }
+	  #questions-view > .shell {
+  padding-bottom: 0;
+}
     .soft-shadow { box-shadow: 0 10px 30px rgba(78, 50, 36, .08); }
     .view { display: none; }
     .view.active { display: block; animation: reveal .32s ease both; }
@@ -133,12 +136,12 @@
 
 /* 説明文 */
 .top-first .intro-lead {
-  margin: 0 0 30px;
-  padding: 14px 22px;
+  margin: 0 0 5px;
+  padding: 10px 20px;
 
   color: #1b4c91;
-  font-size: 1.15rem;
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.6;
   font-weight: 700;
 
   /* 読みやすくする白背景 */
@@ -153,7 +156,7 @@
 .top-start-button {
   width: min(72%, 420px);
 
-  padding: 16px 20px;
+  padding: 15px 15px;
 
   /* 白い枠 */
   border: 3px solid #fff;
@@ -163,7 +166,7 @@
   color: #fff;
 
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
 
   box-shadow:
     0 6px 0 rgba(255,255,255,.35),
@@ -296,18 +299,25 @@
       border-radius: 999px; padding: 10px 14px; background: #fff; color: #665b56; font-size: .85rem; font-weight: 700;
     }
     .importance.on { border-color: #e9b44b; background: #fff8e7; color: #926408; }
-
- .sticky-action {
-  position: fixed;
+	  
+	  
+.sticky-action {
+  position: sticky;
   z-index: 10;
-  bottom: 20px;
-  left: 0;
+  bottom: 0;
   width: 100%;
-  padding: 13px 20px;
-  background: rgba(255,250,245,.92);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid var(--line);
+  padding: 0 20px 70px;
+  background: transparent;
+  border-top: 0;
 }
+
+.sticky-action-inner {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+	  
+ 
     .sticky-action-inner { width: 100%; max-width: 680px; margin: 0 auto; }
     .primary-button { width: 100%; border: 0; border-radius: 17px; padding: 17px; color: #fff; background: var(--coral); font-weight: 700; font-size: 1rem; box-shadow: 0 7px 16px rgba(203,86,71,.22); }
     .primary-button:hover { background: var(--coral-dark); }
@@ -1322,8 +1332,8 @@
      </div>
      <div id="question-list"></div>
     </div>
-    <div class="sticky-action">
-     <div class="sticky-action-inner">
+   <div class="sticky-action">
+     <div  class="sticky-action-inner">
       <button id="show-result-button" type="button" data-template-id="show-result-button" class="canva-button primary-button" style="background: rgb(239, 116, 97); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">本音チェック完了</button>
      </div>
     </div>
@@ -3344,7 +3354,7 @@ if (lineButton) {
         shareUrl()
       );
 
-    window.location.href = lineUrl;
+    window.open(lineUrl, "_blank", "noopener,noreferrer");
 
     setShareFeedback(
       feedbackId,
