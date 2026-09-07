@@ -285,10 +285,46 @@
     }
     .scale-choice:nth-child(1), .scale-choice:nth-child(2), .scale-choice:nth-child(3) { color: #d45b83; }
     .scale-choice:nth-child(4) { color: #8d8984; }
-    .scale-choice:nth-child(5), .scale-choice:nth-child(6), .scale-choice:nth-child(7) { color: #DDBA1E; }
+   .scale-choice:nth-child(5), 
+.scale-choice:nth-child(6), 
+.scale-choice:nth-child(7) { color: #F0A04B; }
     .scale-choice:hover { border-color: #A59EBD; background: #FAF7FF; }
     .scale-choice.center { border-style: dashed; }
-    .scale-choice.selected { color: #fff; background: var(--coral); border-color: var(--coral-dark); box-shadow: inset 0 0 0 2px rgba(255,255,255,.35); }
+
+	  /* 左3つを選択 */
+.scale-choice:nth-child(1).selected,
+.scale-choice:nth-child(2).selected,
+.scale-choice:nth-child(3).selected {
+  color: #fff;
+  background: #d45b83;
+  border-color: #d45b83;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.35);
+}
+
+	  .result-book .result-card.answer-center {
+  border-color: #d45b83;
+  box-shadow:
+    0 8px 20px rgba(212, 91, 131, .10),
+    0 0 0 2px rgba(240, 160, 75, .25);
+}
+
+.result-book .result-card.answer-center .result-scale-marker {
+  background: linear-gradient(90deg, #d45b83 0%, #F0A04B 100%);
+  box-shadow:
+    0 2px 7px rgba(80, 60, 130, .22),
+    0 0 0 2px #d45b83;
+}
+
+/* 右3つを選択 */
+.scale-choice:nth-child(5).selected,
+.scale-choice:nth-child(6).selected,
+.scale-choice:nth-child(7).selected {
+  color: #fff;
+  background: #F0A04B;
+  border-color: #F0A04B;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.35);
+}
+	  
     .scale-choice .point { width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
     .scale-choice.selected .point { display: none; }
     .selected-check { display: none; width: 20px; height: 20px; }
@@ -430,7 +466,8 @@
   margin-bottom: 10px;
   font-size: .72rem;
   line-height: 1.45;
-  font-weight: 700;
+  font-weight: 700;  
+	visibility: hidden;
 }
 
 .result-scale-labels .left {
@@ -873,6 +910,42 @@
   will-change: transform, opacity;
   overflow: hidden;
 }
+	/* 左3つ：ピンク */
+.result-book .result-card.answer-left {
+  border-color: #d45b83;
+}
+
+.result-book .result-card.answer-left .result-scale-marker {
+  background: #d45b83;
+  box-shadow:
+    0 2px 7px rgba(80, 60, 130, .22),
+    0 0 0 2px #d45b83;
+}
+
+/* 真ん中：紫 */
+.result-book .result-card.answer-center {
+  border-color: #8B7AC8;
+}
+
+.result-book .result-card.answer-center .result-scale-marker {
+  background: #8B7AC8;
+  box-shadow:
+    0 2px 7px rgba(80, 60, 130, .22),
+    0 0 0 2px #8B7AC8;
+}
+
+/* 右3つ：オレンジ */
+.result-book .result-card.answer-right {
+  border-color: #F0A04B;
+}
+
+.result-book .result-card.answer-right .result-scale-marker {
+  background: #F0A04B;
+  box-shadow:
+    0 2px 7px rgba(80, 60, 130, .22),
+    0 0 0 2px #F0A04B;
+}  
+	  
 
 /* 後ろのカード */
 .result-book .result-card.stack-1 {
@@ -1190,6 +1263,25 @@
   }
 
 }
+/* 真ん中：通常時は薄いグラデーション */
+.scale-choice:nth-child(4) {
+  background: linear-gradient(90deg, #f3c6d5 0%, #f8d8b8 100%) !important;
+  color: #8d8984 !important;
+  border-color: #e8d6d6 !important;
+}
+
+/* 真ん中：選択すると濃いグラデーション */
+.scale-choice:nth-child(4).selected {
+  background: linear-gradient(90deg, #d45b83 0%, #F0A04B 100%) !important;
+  color: #fff !important;
+  border-color: #d45b83 !important;
+}
+	  .result-book .result-card.answer-center .result-scale-marker {
+  background: linear-gradient(90deg, #d45b83 0%, #F0A04B 100%) !important;
+  box-shadow:
+    0 2px 7px rgba(80, 60, 130, .22),
+    0 0 0 2px #d45b83 !important;
+}
 
   </style>
 		
@@ -1422,27 +1514,23 @@
   </template>
   <script src="/_sdk/489148d8756906ef.editing_sdk.js" integrity="sha512-hxxSbMNp1t+UEu3j/dIQUU4MJnmsCo0Gs3iQVVS706vrCJ3Yt2+ySOlfJEaPyiyQVLjZRmn1dNVqg6M40VZZHQ=="></script>
   <script>
-    const SCALE_MEANINGS = [
-      "左の価値観にかなり近い", "左の価値観に近い", "やや左",
-      "どちらともいえない", "やや右", "右の価値観に近い", "右の価値観にかなり近い"
-    ];
 
     // data/student.json・data/working.jsonとして外部化しやすい共通スキーマのデータ層
     const questionData = {
   student: [
-    { name: "離れている時のコミュニケーション", key: "distance", questions: [
+    { name: "離れている時", key: "distance", questions: [
       ["LINEの返信速度", "早い方が嬉しい", "いつでもいい", "連絡の頻度について話してみよう。自分はどのくらいで返す？相手にはどれくらいを求める？"],
       ["通話すること", "好き・暇電したい", "電話は苦手・必要最低限", "電話で心地よい距離感は？"],
       ["XやTikTokでセクマイ垢を持っていたら", "そのまま使って良い", "消して欲しい", "趣味垢や友達探しなど、アカウントを持つことについて話してみよう"],
       ["離れている時の連絡について", "何をしてるか知りたい", "用事がある時のみが良い", "部活や習い事のスケジュール、休日の予定などどこまで共有したいか話し合ってみよう"]
     ]},
-    { name: "第三者を含むコミュニケーション", key: "third-party", questions: [
+    { name: "第三者を含む時", key: "third-party", questions: [
       ["カミングアウト", "できるだけ伝えたい", "できるだけ秘密にしたい", "話す・話さない理由は？自分自身のセクシャリティを知っている人はいる？"],
       ["「友達」として紹介されることをどう感じる？", "しょうがないけど悲しい", "友達としてで気にならない", "カミングアウトをしていなくて、友達として振る舞わなければならない場合について考えてみよう"],
       ["異性との関わり", "気になる・共有してほしい", "気にしない・自由でいてほしい", "安心できる境界線は？"],
       ["同性との関わり", "気になる・共有してほしい", "気にしない・自由でいてほしい", "自分が友達と関わるときにどうありたいかも考えてみよう"]
     ]},
-    { name: "一緒にいる時のコミュニケーション", key: "together", questions: [
+    { name: "一緒にいる時", key: "together", questions: [
       ["恋人に「彼女」と認識されることについて", "違和感はない", "女性っぽい響きが気になる", "恋人には性別としてどう思っていて欲しいのか話してみよう。"],
       ["デートのスタイル", "アウトドア派", "インドア派", "どんなデートが好き？"],
       ["デート中の距離感", "恋人っぽさを出したい", "恋人っぽさは出したくない", "人前で安心できる距離感は？"],
@@ -1456,19 +1544,19 @@
     ]}
   ],
   working: [
-    { name: "離れている時のコミュニケーション", key: "distance", questions: [
+    { name: "離れている時", key: "distance", questions: [
      ["LINEの返信速度", "早い方が嬉しい", "いつでもいい", "連絡の頻度について話してみよう。自分はどのくらいで返す？相手にはどれくらいを求める？"],
       ["通話すること", "好き・暇電したい", "電話は苦手・必要最低限", "電話で心地よい距離感は？"],
       ["XやTikTokでセクマイ垢を持っていたら", "そのまま使って良い", "消して欲しい", "趣味垢や友達探しなど、アカウントを持つことについて話してみよう"],
       ["離れている時の連絡について", "何をしてるか知りたい", "用事がある時のみが良い", "部活や習い事のスケジュール、休日の予定などどこまで共有したいか話し合ってみよう"]
     ]},
-    { name: "第三者を含むコミュニケーション", key: "third-party", questions: [
+    { name: "第三者を含む時", key: "third-party", questions: [
       ["カミングアウト", "できるだけ伝えたい", "できるだけ秘密にしたい", "話す・話さない理由は？自分自身のセクシャリティを知っている人はいる？"],
       ["「友達」として紹介されることをどう感じる？", "しょうがないけど悲しい", "友達としてで気にならない", "カミングアウトをしていなくて、友達として振る舞わなければならない場合について考えてみよう"],
       ["異性との関わり", "気になる・共有してほしい", "気にしない・自由でいてほしい", "安心できる境界線は？"],
       ["同性との関わり", "気になる・共有してほしい", "気にしない・自由でいてほしい", "自分が友達と関わるときにどうありたいかも考えてみよう"]
     ]},
-    { name: "一緒にいる時のコミュニケーション", key: "together", questions: [
+    { name: "一緒にいる時", key: "together", questions: [
      ["恋人に「彼女」と認識されることについて", "違和感はない", "女性っぽい響きが気になる", "恋人には性別としてどう思っていて欲しいのか話してみよう。"],
       ["デートのスタイル", "アウトドア派", "インドア派", "どんなデートが好き？"],
       ["デート中の距離感", "恋人っぽさを出したい", "恋人っぽさは出したくない", "人前で安心できる距離感は？"],
@@ -1489,9 +1577,9 @@ const categories = {
 };
 
 const sectionStyles = {
-  distance: { name: "離れている時のコミュニケーション", color: "#7A8FD0", soft: "#EEF1FC" },
-  "third-party": { name: "第三者を含むコミュニケーション", color: "#FF7795", soft: "#FAEFF8" },
-  together: { name: "一緒にいる時のコミュニケーション", color: "#65A58E", soft: "#EDF7F2" },
+  distance: { name: "離れている時", color: "#7A8FD0", soft: "#EEF1FC" },
+  "third-party": { name: "第三者を含む時", color: "#FF7795", soft: "#FAEFF8" },
+  together: { name: "一緒にいる時", color: "#65A58E", soft: "#EDF7F2" },
   future: { name: "これからについて", color: "#FFBA2F", soft: "#FFF4E7" }
 };
 
@@ -1613,18 +1701,25 @@ const state = {
 
         const scale = card.querySelector(".scale");
         scale.setAttribute("aria-label", question.question + "の回答");
-        SCALE_MEANINGS.forEach((meaning, pointIndex) => {
-          const value = pointIndex + 1;
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "scale-choice" + (value === 4 ? " center" : "");
-          button.setAttribute("role", "radio");
-          button.setAttribute("aria-label", meaning);
-          button.dataset.value = value;
-          button.innerHTML = '<span class="point"></span><i class="selected-check" data-lucide="check" width="20"></i>';
-          button.addEventListener("click", () => selectAnswer(question.id, value));
-          scale.appendChild(button);
-        });
+for (let pointIndex = 0; pointIndex < 7; pointIndex++) {
+  const value = pointIndex + 1;
+  const button = document.createElement("button");
+
+  button.type = "button";
+  button.className = "scale-choice" + (value === 4 ? " center" : "");
+  button.setAttribute("role", "radio");
+  button.setAttribute("aria-label", "回答 " + value);
+  button.dataset.value = value;
+
+  button.innerHTML =
+    '<span class="point"></span><i class="selected-check" data-lucide="check" width="20"></i>';
+
+  button.addEventListener("click", () =>
+    selectAnswer(question.id, value)
+  );
+
+  scale.appendChild(button);
+}
 
         const importantButton = card.querySelector(".importance");
         importantButton.addEventListener("click", () => {
@@ -1656,7 +1751,8 @@ const state = {
         button.classList.toggle("selected", selected);
         button.setAttribute("aria-checked", String(selected));
       });
-      card.querySelector(".answer-text").textContent = value ? SCALE_MEANINGS[value - 1] : "まだ選んでいません";
+     card.querySelector(".answer-text").textContent =
+  value ? (value < 4 ? question.leftLabel : value > 4 ? question.rightLabel : "どちらでもない") : "まだ選んでいません";
       const important = Boolean(state.important[question.id]);
       const importance = card.querySelector(".importance");
       importance.classList.toggle("on", important);
@@ -1702,7 +1798,7 @@ const state = {
       if (!value) return "未回答";
       if (value === 4) return "どちらともいえない";
       const label = value < 4 ? question.leftLabel : question.rightLabel;
-      return label + "（" + SCALE_MEANINGS[value - 1] + "）";
+      return label;
     }
 		/* =========================================================
    結果画像生成・PNG保存
@@ -2060,8 +2156,6 @@ function drawResultQuestion(
   /*
    * 回答内容
    */
-  const answerText =
-    SCALE_MEANINGS[value - 1] || "";
 
   drawText(
     ctx,
@@ -2983,8 +3077,17 @@ function renderResults() {
     const position =
       ((answerValue - 1) / 6) * 100;
 
-    item.className =
-      "result-card soft-shadow";
+
+	 item.className =
+  "result-card soft-shadow";
+
+if (answerValue <= 3) {
+  item.classList.add("answer-left");
+} else if (answerValue === 4) {
+  item.classList.add("answer-center");
+} else {
+  item.classList.add("answer-right");
+}
 
     item.dataset.index = index;
 
@@ -3074,16 +3177,7 @@ function renderResults() {
     ).textContent =
       question.question;
 
-    /* 左右ラベル */
-    item.querySelector(
-      ".result-scale-labels .left"
-    ).textContent =
-      question.leftLabel;
 
-    item.querySelector(
-      ".result-scale-labels .right"
-    ).textContent =
-      question.rightLabel;
 
     /* 回答 */
     item.querySelector(
